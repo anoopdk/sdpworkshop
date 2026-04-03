@@ -1,0 +1,20 @@
+resources:
+  jobs:
+    job_ecommerce_e2e:
+      name: job_ecommerce_e2e
+      trigger:
+        pause_status: UNPAUSED
+        periodic:
+          interval: 2
+          unit: WEEKS
+      tasks:
+        - task_key: job_ecommerce_e2e
+          pipeline_task:
+            pipeline_id: 864ad47e-4225-495f-8187-eb8ea402e7b0
+            full_refresh: false
+      tags:
+        domain: ecommerce
+        region: london
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED
