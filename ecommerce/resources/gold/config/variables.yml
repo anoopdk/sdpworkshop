@@ -1,4 +1,0 @@
-variables:
-  catalog_env:
-    description: The environment to use for the catalog (e.g. dev, prod)
-    default: dev
