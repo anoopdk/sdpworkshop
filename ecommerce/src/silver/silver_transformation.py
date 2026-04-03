@@ -1,13 +1,15 @@
+import os
 from pyspark import pipelines as sdp
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 
-CATALOG     = "ecommerce_${var.catalog_env}"
+catalog_env = os.getenv("catalog_env", "dev")
+CATALOG     = f"ecommerce_{catalog_env}"
 SCHEMA      = "bronze"
 VOLUME_PATH = f"/Volumes/{CATALOG}/{SCHEMA}/raw_files"
 
 @sdp.materialized_view(
-    name="ecommerce_${var.catalog_env}.silver.silver_orders",
+    name=f"{CATALOG}.silver.silver_orders",
     comment="Cleaned and enriched orders. Invalid records are dropped.",
     table_properties={"quality": "silver"}
 )
@@ -32,7 +34,7 @@ def silver_orders():
 
 # --- SILVER TABLE 2: Cleaned Customers ---
 @sdp.materialized_view(
-    name="ecommerce_${var.catalog_env}.silver.silver_customers",
+    name=f"{CATALOG}.silver.silver_customers",
     comment="Cleaned customer profiles with standardised fields.",
     table_properties={"quality": "silver"}
 )
@@ -52,13 +54,13 @@ def silver_customers():
 
 # Declare the target table first
 sdp.create_streaming_table(
-    name="ecommerce_${var.catalog_env}.silver.silver_customer_dim_scd2",
+    name=f"{CATALOG}.silver.silver_customer_dim_scd2",
     comment="SCD Type 2 for customers. Tracks full history of changes."
 )
 
 # Then define the CDC flow
 sdp.create_auto_cdc_flow(
-    target="ecommerce_${var.catalog_env}.silver.silver_customer_dim_scd2",
+    target=f"{CATALOG}.silver.silver_customer_dim_scd2",
     source=f"{CATALOG}.{SCHEMA}.bronze_customer_cdc",
     keys=["customer_id"],
     sequence_by=col("cdc_timestamp"),
