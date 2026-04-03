@@ -2,7 +2,7 @@ from pyspark import pipelines as sdp
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 
-CATALOG     = "ecommerce.${var.catalog_env}"
+CATALOG     = "ecommerce_${var.catalog_env}"
 SCHEMA      = "bronze"
 VOLUME_PATH = f"/Volumes/{CATALOG}/{SCHEMA}/raw_files"
 

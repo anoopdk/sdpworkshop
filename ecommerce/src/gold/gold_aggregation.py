@@ -3,12 +3,12 @@ from pyspark.sql.functions import *
 from pyspark.sql.types import *
 from pyspark.sql.window import Window
 
-CATALOG     = "ecommerce.${var.catalog_env}"
+CATALOG     = "ecommerce_${var.catalog_env}"
 SCHEMA      = "silver"
 VOLUME_PATH = f"/Volumes/{CATALOG}/{SCHEMA}/raw_files"
 
 @sdp.materialized_view(
-    name="ecommerce.${var.catalog_env}.gold.gold_daily_revenue",
+    name="ecommerce_${var.catalog_env}.gold.gold_daily_revenue",
     comment="Daily revenue by city and payment method. Powers the revenue dashboard.",
     table_properties={"quality": "gold"}
 )
@@ -29,7 +29,7 @@ def gold_daily_revenue():
 
 # --- GOLD TABLE 2: Customer 360 View ---
 @sdp.materialized_view(
-    name="ecommerce.${var.catalog_env}.gold.gold_customer_360",
+    name="ecommerce_${var.catalog_env}.gold.gold_customer_360",
     comment="Unified customer profile with order history metrics.",
     table_properties={"quality": "gold"}
 )
@@ -63,7 +63,7 @@ def gold_customer_360():
 
 # --- GOLD TABLE 3: Top Products ---
 @sdp.materialized_view(
-    name="ecommerce.${var.catalog_env}.gold.gold_top_products",
+    name="ecommerce_${var.catalog_env}.gold.gold_top_products",
     comment="Product performance ranking by revenue and order volume.",
     table_properties={"quality": "gold"}
 )

@@ -4,15 +4,15 @@ resources:
       name: sdp-ecommerce_e2e
       libraries:
         - glob:
-            include: /Workspace/Users/anoopdk@gmail.com/sdpworkshop/ecommerce/src/**
+            include: ../../src/**
       schema: bronze
       continuous: false
       development: false
       photon: true
       channel: CURRENT
-      catalog: ecommerce.${var.catalog_env}
+      catalog: ecommerce_${var.catalog_env}
       serverless: true
       tags:
         etl: pipeline
         sdp: yes
-      root_path: /Workspace/Users/anoopdk@gmail.com/sdpworkshop/ecommerce
+      root_path: /Workspace/${bundle.target}/${bundle.name}
