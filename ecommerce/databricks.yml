@@ -32,6 +32,9 @@ targets:
       root_path: /Workspace/${bundle.target}/${bundle.name}
     variables:
       catalog_env: dev
+    permissions:
+      - user_name: anoopdk@gmail.com
+        level: CAN_MANAGE
   prod:
     mode: production
     workspace:

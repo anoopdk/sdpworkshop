@@ -1,7 +1,7 @@
 resources:
   pipelines:
     pipeline_sdp_ecommerce_e2e:
-      name: sdp-ecommerce_e2e
+      name: sdp-ecommerce_e2e_${bundle.target}
       libraries:
         - glob:
             include: ../../src/**
@@ -16,3 +16,5 @@ resources:
         etl: pipeline
         sdp: yes
       root_path: /Workspace/${bundle.target}/${bundle.name}
+      configuration:
+        catalog_env: ${var.catalog_env}
