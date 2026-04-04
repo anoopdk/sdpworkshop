@@ -4,7 +4,8 @@ import sys
 # ---------------------------------------------------------------------------
 # Make the repo-root "config" package importable regardless of working dir
 # ---------------------------------------------------------------------------
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+# sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
+sys.path.insert(0, "/Workspace/dev/ecommerce/files")
 
 from pyspark import pipelines as sdp
 from pyspark.sql.functions import *

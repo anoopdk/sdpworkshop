@@ -1,6 +1,8 @@
 # ---------------------------------------------------------------------------
 # Decorator Factory: Apply Expectations Cleanly
 # ---------------------------------------------------------------------------
+
+from pyspark import pipelines as sdp
 def apply_expectations(expectations: dict):
     """
     Converts expectation config into chained SDP decorators.
