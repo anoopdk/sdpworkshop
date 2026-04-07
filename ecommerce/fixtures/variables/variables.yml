@@ -1,1 +1,7 @@
-catalog_env: dev
+variables:
+  catalog_env:
+    description: Catalog name to use
+    default: dev
+  prod_service_principal_name:
+    description: Service principal name or application ID used for prod run_as
+    default: ae526d29-e3b0-4eb8-9874-0b3ff44587b6

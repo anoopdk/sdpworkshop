@@ -18,16 +18,14 @@ SILVER_ORDERS_EXPECTATIONS = {
     "expect_or_drop": {
         "positive_quantity": "quantity > 0",
         "positive_price":    "unit_price > 0",
-    },
-    "expect_or_fail": {},
+    }
 }
 
 SILVER_CUSTOMERS_EXPECTATIONS = {
     "expect": {
         "valid_email": "email LIKE '%@%'",
     },
-    "expect_or_drop": {},
     "expect_or_fail": {
         "customer_id_not_null": "customer_id IS NOT NULL",
-    },
+    }
 }

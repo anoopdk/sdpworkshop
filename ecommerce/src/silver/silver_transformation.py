@@ -11,12 +11,8 @@ from pyspark import pipelines as sdp
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 
-from config.expect.silver_expect import (
-    SILVER_ORDERS_EXPECTATIONS,
-    SILVER_CUSTOMERS_EXPECTATIONS,
-)
-
-from utils.helper_expect import apply_expectations
+from config.expect.silver_expect import *
+from utils.helper_expect import *
 # ---------------------------------------------------------------------------
 # Environment setup
 # ---------------------------------------------------------------------------

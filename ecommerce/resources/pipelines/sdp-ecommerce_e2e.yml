@@ -18,3 +18,5 @@ resources:
       root_path: /Workspace/${bundle.target}/${bundle.name}
       configuration:
         catalog_env: ${var.catalog_env}
+      # run_as:
+      #       service_principal_name: ${var.prod_service_principal_name}

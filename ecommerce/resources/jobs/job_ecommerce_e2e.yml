@@ -10,7 +10,7 @@ resources:
       tasks:
         - task_key: job_ecommerce_e2e
           pipeline_task:
-            pipeline_id: 864ad47e-4225-495f-8187-eb8ea402e7b0
+            pipeline_id: ${resources.pipelines.pipeline_sdp_ecommerce_e2e.id}
             full_refresh: false
       tags:
         domain: ecommerce
