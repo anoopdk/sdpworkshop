@@ -3,33 +3,15 @@ from pyspark import pipelines as sdp
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
 
-# BRONZE_TAGS = {
-#     "quality": "bronze",
-#     "layer": "bronze",
-#     "domain": "ecommerce",
-# }
-
 catalog_env = os.getenv("catalog_env", "dev")
 CATALOG     = f"ecommerce_{catalog_env}"
 SCHEMA      = "bronze"
-VOLUME_PATH = f"/Volumes/{CATALOG}/{SCHEMA}/raw_files"
+VOLUME_PATH = f"/Volumes/{CATALOG}/{SCHEMA}/source_files"
 
 table_props = {
-                # **BRONZE_TAGS,
                 "delta.enableRowTracking": "true",
                 "delta.enableChangeDataFeed": "true",
             }
-
-
-def _load_first_available_stream(reader, candidate_paths):
-    for path in candidate_paths:
-        try:
-            return reader.load(path)
-        except Exception:
-            continue
-    raise FileNotFoundError(
-        f"None of the expected product source paths exist: {candidate_paths}"
-    )
 
 @sdp.table(
     name=f"{CATALOG}.{SCHEMA}.bronze_order",
@@ -77,21 +59,13 @@ def bronze_customer():
     table_properties=table_props
 )
 def bronze_product():
-    source_df = _load_first_available_stream(
+    reader = (
         spark.readStream.format("cloudFiles")
         .option("cloudFiles.format", "csv")
         .option("header", "true")
         .option("cloudFiles.inferColumnTypes", "true")
-        .option("cloudFiles.schemaLocation", f"{VOLUME_PATH}/_schemas/cdc_event"),
-        [
-            f"{VOLUME_PATH}/cdc_event/",
-            f"{VOLUME_PATH}/product_cdc/",
-            f"{VOLUME_PATH}/products/",
-        ],
-    )
-
-    return (
-        source_df
+        .option("cloudFiles.schemaLocation", f"{VOLUME_PATH}/_schemas/products")
+        .load(f"{VOLUME_PATH}/products/")
         .withColumn("_ingest_ts", current_timestamp())
         .withColumn("_file_mod_time", col("_metadata.file_modification_time"))
         .withColumn("_prod_index", lit(0).cast("long"))

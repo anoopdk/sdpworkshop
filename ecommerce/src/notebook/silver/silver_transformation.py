@@ -9,7 +9,6 @@ sys.path.insert(0, "/Workspace/dev/ecommerce/files")
 from pyspark import pipelines as sdp
 from pyspark.sql.functions import *
 from pyspark.sql.types import *
-from pyspark.sql import Window
 
 from src.config.silver.expect.silver_expect import *
 from utils.helper_expect import *
@@ -37,15 +36,11 @@ table_props = {
 # ---------------------------------------------------------------------------
 # ORDERS STAGE (clean/dedup/standardize/audit/surrogate key)
 # ---------------------------------------------------------------------------
-@sdp.materialized_view(
-    name=f"{CATALOG}.silver.silver_orders_stage",
-    comment="FAB-5 stage for orders from bronze_order.",
-    table_properties=table_props,
-)
+@sdp.temporary_view(name="silver_orders_stage")
 @apply_expectations(SILVER_ORDERS_EXPECTATIONS)
 def silver_orders_stage():
-    base = (
-        spark.read.table(f"{CATALOG}.{SCHEMA}.bronze_order")
+    return (
+        spark.readStream.table(f"{CATALOG}.{SCHEMA}.bronze_order")
         .withColumn("order_date", to_date(col("order_date"), "yyyy-MM-dd"))
         .withColumn("order_status", lower(trim(col("order_status"))))
         .withColumn("payment_method", lower(trim(col("payment_method"))))
@@ -58,16 +53,6 @@ def silver_orders_stage():
         .withColumn("_event_ts", to_timestamp(col("order_date")))
         .withColumn("_updated_at", col("_ingest_ts"))
         .withColumn("_inserted_at", current_timestamp())
-    )
-
-    window_dedup = Window.partitionBy("order_id", "_event_ts").orderBy(
-        desc("_ingest_ts"), desc("_file_mod_time"), desc("_source_file")
-    )
-
-    return (
-        base
-        .withColumn("_record_number", row_number().over(window_dedup))
-        .filter(col("_record_number") == 1)
         .withColumn(
             "order_sk",
             sha2(
@@ -99,8 +84,8 @@ def silver_orders_stage():
             "_updated_at",
             "_inserted_at",
             "_file_mod_time",
+            "_source_file",
             "_order_index",
-            "_record_number",
         )
     )
 
@@ -108,15 +93,11 @@ def silver_orders_stage():
 # ---------------------------------------------------------------------------
 # CUSTOMERS STAGE (clean/dedup/standardize/audit/surrogate key)
 # ---------------------------------------------------------------------------
-@sdp.materialized_view(
-    name=f"{CATALOG}.silver.silver_customers_stage",
-    comment="FAB-5 stage for customers from bronze_customer.",
-    table_properties=table_props,
-)
+@sdp.temporary_view(name="silver_customers_stage")
 @apply_expectations(SILVER_CUSTOMERS_EXPECTATIONS)
 def silver_customers_stage():
-    base = (
-        spark.read.table(f"{CATALOG}.{SCHEMA}.bronze_customer")
+    return (
+        spark.readStream.table(f"{CATALOG}.{SCHEMA}.bronze_customer")
         .withColumn("customer_name", initcap(trim(col("customer_name"))))
         .withColumn("email", lower(trim(col("email"))))
         .withColumn("signup_date", to_date(col("signup_date"), "yyyy-MM-dd"))
@@ -126,16 +107,6 @@ def silver_customers_stage():
         .withColumn("_event_ts", coalesce(to_timestamp(col("signup_date")), col("_ingest_ts")))
         .withColumn("_updated_at", col("_ingest_ts"))
         .withColumn("_inserted_at", current_timestamp())
-    )
-
-    window_dedup = Window.partitionBy("customer_id", "_event_ts").orderBy(
-        desc("_ingest_ts"), desc("_file_mod_time"), desc("_source_file")
-    )
-
-    return (
-        base
-        .withColumn("_record_number", row_number().over(window_dedup))
-        .filter(col("_record_number") == 1)
         .withColumn(
             "customer_sk",
             sha2(
@@ -162,8 +133,8 @@ def silver_customers_stage():
             "_updated_at",
             "_inserted_at",
             "_file_mod_time",
+            "_source_file",
             "_cust_index",
-            "_record_number",
         )
     )
 
@@ -171,14 +142,10 @@ def silver_customers_stage():
 # ---------------------------------------------------------------------------
 # PRODUCTS STAGE (clean/dedup/standardize/audit/surrogate key)
 # ---------------------------------------------------------------------------
-@sdp.materialized_view(
-    name=f"{CATALOG}.silver.silver_products_stage",
-    comment="FAB-5 stage for product CDC from bronze_product.",
-    table_properties=table_props,
-)
+@sdp.temporary_view(name="silver_products_stage")
 def silver_products_stage():
-    base = (
-        spark.read.table(f"{CATALOG}.{SCHEMA}.bronze_product")
+    return (
+        spark.readStream.table(f"{CATALOG}.{SCHEMA}.bronze_product")
         .withColumn("operation", upper(trim(col("operation"))))
         .withColumn("product_name", initcap(trim(col("product_name"))))
         .withColumn("category", initcap(trim(col("category"))))
@@ -190,16 +157,6 @@ def silver_products_stage():
         .withColumn("_event_ts", col("cdc_timestamp"))
         .withColumn("_updated_at", col("_ingest_ts"))
         .withColumn("_inserted_at", current_timestamp())
-    )
-
-    window_dedup = Window.partitionBy("product_id", "_event_ts").orderBy(
-        desc("_ingest_ts"), desc("_file_mod_time"), desc("_source_file")
-    )
-
-    return (
-        base
-        .withColumn("_record_number", row_number().over(window_dedup))
-        .filter(col("_record_number") == 1)
         .withColumn(
             "product_sk",
             sha2(
@@ -228,8 +185,8 @@ def silver_products_stage():
             "_updated_at",
             "_inserted_at",
             "_file_mod_time",
+            "_source_file",
             "_prod_index",
-            "_record_number",
         )
     )
 
@@ -247,10 +204,9 @@ sdp.create_streaming_table(
 
 sdp.create_auto_cdc_flow(
     target=f"{CATALOG}.silver.silver_orders",
-    source=f"{CATALOG}.silver.silver_orders_stage",
+    source="silver_orders_stage",
     keys=["order_id"],
     sequence_by=struct(col("_event_ts"), col("_ingest_ts"), col("_file_mod_time"), col("_source_file")),
-    except_column_list=["_record_number"],
     stored_as_scd_type=2,
 )
 
@@ -263,10 +219,9 @@ sdp.create_streaming_table(
 
 sdp.create_auto_cdc_flow(
     target=f"{CATALOG}.silver.silver_customers",
-    source=f"{CATALOG}.silver.silver_customers_stage",
+    source="silver_customers_stage",
     keys=["customer_id"],
     sequence_by=struct(col("_event_ts"), col("_ingest_ts"), col("_file_mod_time"), col("_source_file")),
-    except_column_list=["_record_number"],
     stored_as_scd_type=2,
 )
 
@@ -279,11 +234,10 @@ sdp.create_streaming_table(
 
 sdp.create_auto_cdc_flow(
     target=f"{CATALOG}.silver.silver_products",
-    source=f"{CATALOG}.silver.silver_products_stage",
+    source="silver_products_stage",
     keys=["product_id"],
     sequence_by=struct(col("_event_ts"), col("_ingest_ts"), col("_file_mod_time"), col("_source_file")),
     apply_as_deletes=expr("operation = 'DELETE'"),
-    except_column_list=["_record_number"],
     stored_as_scd_type=2,
 )
 

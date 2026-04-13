@@ -166,16 +166,23 @@ def gold_order_customer_product_pit_fact():
     customers = spark.read.table(f"{CATALOG}.{SCHEMA}.silver_customers").alias("c")
     products = spark.read.table(f"{CATALOG}.{SCHEMA}.silver_products").alias("p")
 
+    order_sequence = struct(
+        col("o._event_ts"),
+        col("o._ingest_ts"),
+        col("o._file_mod_time"),
+        col("o._source_file"),
+    )
+
     customer_temporal_condition = (
         (col("o.customer_id") == col("c.customer_id"))
-        & (col("c.__START_AT") <= col("o._event_ts"))
-        & (col("c.__END_AT").isNull() | (col("c.__END_AT") > col("o._event_ts")))
+        & (col("c.__START_AT") <= order_sequence)
+        & (col("c.__END_AT").isNull() | (col("c.__END_AT") > order_sequence))
     )
 
     product_temporal_condition = (
         (col("o.product_id") == col("p.product_id"))
-        & (col("p.__START_AT") <= col("o._event_ts"))
-        & (col("p.__END_AT").isNull() | (col("p.__END_AT") > col("o._event_ts")))
+        & (col("p.__START_AT") <= order_sequence)
+        & (col("p.__END_AT").isNull() | (col("p.__END_AT") > order_sequence))
     )
 
     return (
