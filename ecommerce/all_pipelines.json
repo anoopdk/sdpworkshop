@@ -1,0 +1,94 @@
+﻿[
+  {
+    "creator_user_name": "anoopdk@gmail.com",
+    "latest_updates": [
+      {
+        "creation_time": "2026-04-12T20:40:29.468Z",
+        "state": "FAILED",
+        "update_id": "013f0fcf-1c15-4926-83d0-f3c3f6ec18a4"
+      },
+      {
+        "creation_time": "2026-04-04T20:53:26.933Z",
+        "state": "COMPLETED",
+        "update_id": "976e300e-4fed-4808-afb1-9bb3ca15bad2"
+      },
+      {
+        "creation_time": "2026-04-03T22:44:49.498Z",
+        "state": "COMPLETED",
+        "update_id": "70fec029-f1ea-4961-9c82-3eb4f9a5cbf0"
+      }
+    ],
+    "name": "dev_anoopdk_sdp-ecommerce_e2e_dev",
+    "pipeline_id": "6184e312-5926-41ef-b0da-92b995d3edb1",
+    "run_as_user_name": "anoopdk@gmail.com",
+    "state": "IDLE"
+  },
+  {
+    "creator_user_name": "anoopdk@gmail.com",
+    "latest_updates": [
+      {
+        "creation_time": "2026-04-12T20:39:34.388Z",
+        "state": "FAILED",
+        "update_id": "392e9253-67a0-4fe2-a981-5d2c578772b8"
+      },
+      {
+        "creation_time": "2026-04-03T22:41:25.693Z",
+        "state": "FAILED",
+        "update_id": "6fd22d29-e537-4aa2-aab5-18ec42a76f3f"
+      },
+      {
+        "creation_time": "2026-04-03T22:35:41.484Z",
+        "state": "FAILED",
+        "update_id": "57d61b28-e533-4c4a-b54f-bcee25c04c11"
+      },
+      {
+        "creation_time": "2026-04-03T21:49:31.165Z",
+        "state": "FAILED",
+        "update_id": "e584ea66-8987-42a1-bc20-bf8f7e74cc88"
+      },
+      {
+        "creation_time": "2026-04-03T21:47:12.489Z",
+        "state": "CANCELED",
+        "update_id": "8b504267-accd-403b-a087-4925659bb597"
+      }
+    ],
+    "name": "sdp-ecommerce_e2e",
+    "pipeline_id": "864ad47e-4225-495f-8187-eb8ea402e7b0",
+    "run_as_user_name": "anoopdk@gmail.com",
+    "state": "IDLE"
+  },
+  {
+    "creator_user_name": "anoopdk@gmail.com",
+    "latest_updates": [
+      {
+        "creation_time": "2026-04-04T08:44:05.636Z",
+        "state": "FAILED",
+        "update_id": "8408b8b3-df50-434a-9849-8f01fa38a81d"
+      },
+      {
+        "creation_time": "2026-04-04T08:41:05.921Z",
+        "state": "FAILED",
+        "update_id": "b543aa70-3b46-48b9-877e-2666649aec6d"
+      },
+      {
+        "creation_time": "2026-04-04T08:39:26.579Z",
+        "state": "FAILED",
+        "update_id": "b362ccb9-bda9-4cd7-88f2-a539b4483a1a"
+      },
+      {
+        "creation_time": "2026-04-04T08:38:27.006Z",
+        "state": "FAILED",
+        "update_id": "8712ecf5-ff2b-4fd8-a9ff-9d4fb9b13803"
+      },
+      {
+        "creation_time": "2026-04-04T08:37:44.602Z",
+        "state": "FAILED",
+        "update_id": "2ce2c6e1-1b99-4dcb-861f-01f8ef40c492"
+      }
+    ],
+    "name": "sdp-ecommerce_e2e_prod",
+    "pipeline_id": "872e65f1-be60-4220-aed5-d0b69561dde2",
+    "run_as_user_name": "anoopdk@gmail.com",
+    "state": "IDLE"
+  }
+]
