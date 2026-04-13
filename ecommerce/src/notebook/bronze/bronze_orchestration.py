@@ -20,6 +20,17 @@ table_props = {
                 "delta.enableChangeDataFeed": "true",
             }
 
+
+def _load_first_available_stream(reader, candidate_paths):
+    for path in candidate_paths:
+        try:
+            return reader.load(path)
+        except Exception:
+            continue
+    raise FileNotFoundError(
+        f"None of the expected product source paths exist: {candidate_paths}"
+    )
+
 @sdp.table(
     name=f"{CATALOG}.{SCHEMA}.bronze_order",
     comment="Master bronze orders source table.",
@@ -35,7 +46,8 @@ def bronze_order():
         .option("cloudFiles.schemaLocation", f"{VOLUME_PATH}/_schemas/orders")
         .load(f"{VOLUME_PATH}/orders/")
         .withColumn("_ingest_ts", current_timestamp())
-        .withColumn("_order_index", col("_metadata.row_index"))
+        .withColumn("_order_index", lit(0).cast("long"))
+        .withColumn("_source_file", col("_metadata.file_path"))
         .withColumn("_file_mod_time", col("_metadata.file_modification_time"))
     )
 
@@ -54,7 +66,8 @@ def bronze_customer():
         .load(f"{VOLUME_PATH}/customers/")
         .withColumn("_ingest_ts", current_timestamp())
         .withColumn("_file_mod_time", col("_metadata.file_modification_time"))
-        .withColumn("_cust_index", col("_metadata.row_index"))
+        .withColumn("_cust_index", lit(0).cast("long"))
+        .withColumn("_source_file", col("_metadata.file_path"))
     )
 
 @sdp.table(
@@ -64,14 +77,23 @@ def bronze_customer():
     table_properties=table_props
 )
 def bronze_product():
-    return (
+    source_df = _load_first_available_stream(
         spark.readStream.format("cloudFiles")
         .option("cloudFiles.format", "csv")
         .option("header", "true")
         .option("cloudFiles.inferColumnTypes", "true")
-        .option("cloudFiles.schemaLocation", f"{VOLUME_PATH}/_schemas/cdc_event")
-        .load(f"{VOLUME_PATH}/cdc_event/")
+        .option("cloudFiles.schemaLocation", f"{VOLUME_PATH}/_schemas/cdc_event"),
+        [
+            f"{VOLUME_PATH}/cdc_event/",
+            f"{VOLUME_PATH}/product_cdc/",
+            f"{VOLUME_PATH}/products/",
+        ],
+    )
+
+    return (
+        source_df
         .withColumn("_ingest_ts", current_timestamp())
         .withColumn("_file_mod_time", col("_metadata.file_modification_time"))
-        .withColumn("_prod_index", col("_metadata.row_index"))
+        .withColumn("_prod_index", lit(0).cast("long"))
+        .withColumn("_source_file", col("_metadata.file_path"))
     )

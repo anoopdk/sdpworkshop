@@ -61,7 +61,7 @@ def silver_orders_stage():
     )
 
     window_dedup = Window.partitionBy("order_id", "_event_ts").orderBy(
-        desc("_ingest_ts"), desc("_order_index")
+        desc("_ingest_ts"), desc("_file_mod_time"), desc("_source_file")
     )
 
     return (
@@ -129,7 +129,7 @@ def silver_customers_stage():
     )
 
     window_dedup = Window.partitionBy("customer_id", "_event_ts").orderBy(
-        desc("_ingest_ts"), desc("_cust_index")
+        desc("_ingest_ts"), desc("_file_mod_time"), desc("_source_file")
     )
 
     return (
@@ -193,7 +193,7 @@ def silver_products_stage():
     )
 
     window_dedup = Window.partitionBy("product_id", "_event_ts").orderBy(
-        desc("_ingest_ts"), desc("_prod_index")
+        desc("_ingest_ts"), desc("_file_mod_time"), desc("_source_file")
     )
 
     return (
@@ -249,7 +249,7 @@ sdp.create_auto_cdc_flow(
     target=f"{CATALOG}.silver.silver_orders",
     source=f"{CATALOG}.silver.silver_orders_stage",
     keys=["order_id"],
-    sequence_by=struct(col("_event_ts"), col("_ingest_ts"), col("_order_index")),
+    sequence_by=struct(col("_event_ts"), col("_ingest_ts"), col("_file_mod_time"), col("_source_file")),
     except_column_list=["_record_number"],
     stored_as_scd_type=2,
 )
@@ -265,7 +265,7 @@ sdp.create_auto_cdc_flow(
     target=f"{CATALOG}.silver.silver_customers",
     source=f"{CATALOG}.silver.silver_customers_stage",
     keys=["customer_id"],
-    sequence_by=struct(col("_event_ts"), col("_ingest_ts"), col("_cust_index")),
+    sequence_by=struct(col("_event_ts"), col("_ingest_ts"), col("_file_mod_time"), col("_source_file")),
     except_column_list=["_record_number"],
     stored_as_scd_type=2,
 )
@@ -281,7 +281,7 @@ sdp.create_auto_cdc_flow(
     target=f"{CATALOG}.silver.silver_products",
     source=f"{CATALOG}.silver.silver_products_stage",
     keys=["product_id"],
-    sequence_by=struct(col("_event_ts"), col("_ingest_ts"), col("_prod_index")),
+    sequence_by=struct(col("_event_ts"), col("_ingest_ts"), col("_file_mod_time"), col("_source_file")),
     apply_as_deletes=expr("operation = 'DELETE'"),
     except_column_list=["_record_number"],
     stored_as_scd_type=2,
