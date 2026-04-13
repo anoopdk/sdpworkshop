@@ -28,9 +28,9 @@ table_props = {
             }
 
 # ===========================================================================
-# LAYER 1: FAB-5 STAGE TABLES (From Bronze)
+# LAYER 1: STAGE TABLES (From Bronze)
 # ===========================================================================
-# FAB-5 Implementation= Clean + Deduplicate + Late-arrival handling + Standardize + Audit + Surrogate key
+# FAB-5 Implementation= Clean + Deduplicate + Late-arrival handling + Standardize + Audit
 
 
 # ---------------------------------------------------------------------------

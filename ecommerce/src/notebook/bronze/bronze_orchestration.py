@@ -59,7 +59,7 @@ def bronze_customer():
     table_properties=table_props
 )
 def bronze_product():
-    reader = (
+    return(
         spark.readStream.format("cloudFiles")
         .option("cloudFiles.format", "csv")
         .option("header", "true")
