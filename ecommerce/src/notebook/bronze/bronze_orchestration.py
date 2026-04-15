@@ -1,3 +1,4 @@
+#######
 import os
 from pyspark import pipelines as sdp
 from pyspark.sql.functions import *
@@ -33,28 +34,32 @@ table_props = {
 #         .withColumn("_file_mod_time", col("_metadata.file_modification_time"))
 #     )
 
-# 1. Define the table first (The "Container")
+# 1. Define the container
 sdp.create_streaming_table(
     name=f"{CATALOG}.{SCHEMA}.bronze_order",
-    comment="Master bronze orders source table.",
     table_properties=table_props
 )
 
-# 2. Define the Flow (The "Pipe")
+# 2. THE BACKFILL (Optional - if you have legacy data)
+# @sdp.append_flow(target=f"{CATALOG}.{SCHEMA}.bronze_order", once=True)
+# def backfill_orders():
+#     # This runs once, loads your historical data, and then finishes.
+#     return spark.read.format("parquet").load(f"{VOLUME_PATH}/historical_orders/")
+
+# 3. THE CONTINUOUS INGEST (Your cloudFiles code)
 @sdp.append_flow(target=f"{CATALOG}.{SCHEMA}.bronze_order")
-def bronze_order_ingest():
+def stream_orders():
+    # This stays active and waits for new files to land in the volume.
     return (
         spark.readStream.format("cloudFiles")
         .option("cloudFiles.format", "csv")
         .option("header", "true")
-        .option("cloudFiles.inferColumnTypes", "true")
         .option("cloudFiles.schemaLocation", f"{VOLUME_PATH}/_schemas/orders")
         .load(f"{VOLUME_PATH}/orders/")
         .select(
-            "*", # Keep all source columns
+            "*",
             current_timestamp().alias("_ingest_ts"),
             col("_metadata.file_path").alias("_source_file"),
-            col("_metadata.file_modification_time").alias("_file_mod_time")
         )
     )
 
