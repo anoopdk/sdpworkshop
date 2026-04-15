@@ -13,24 +13,49 @@ table_props = {
                 "delta.enableChangeDataFeed": "true",
             }
 
-@sdp.table(
+# @sdp.table(
+#     name=f"{CATALOG}.{SCHEMA}.bronze_order",
+#     comment="Master bronze orders source table.",
+#     table_properties=table_props
+# )
+# def bronze_order():
+#     return (
+#         spark.readStream.format("cloudFiles")
+#         .option("cloudFiles.format", "csv")
+#         .option("header", "true")
+#         .option("cloudFiles.inferColumnTypes", "true")
+#         .option("cloudFiles.schemaEvolutionMode", "addNewColumns")
+#         .option("cloudFiles.schemaLocation", f"{VOLUME_PATH}/_schemas/orders")
+#         .load(f"{VOLUME_PATH}/orders/")
+#         .withColumn("_ingest_ts", current_timestamp())
+#         # .withColumn("_order_index", lit(0).cast("long"))
+#         .withColumn("_source_file", col("_metadata.file_path"))
+#         .withColumn("_file_mod_time", col("_metadata.file_modification_time"))
+#     )
+
+# 1. Define the table first (The "Container")
+sdp.create_streaming_table(
     name=f"{CATALOG}.{SCHEMA}.bronze_order",
     comment="Master bronze orders source table.",
     table_properties=table_props
 )
-def bronze_order():
+
+# 2. Define the Flow (The "Pipe")
+@sdp.append_flow(target=f"{CATALOG}.{SCHEMA}.bronze_order")
+def bronze_order_ingest():
     return (
         spark.readStream.format("cloudFiles")
         .option("cloudFiles.format", "csv")
         .option("header", "true")
         .option("cloudFiles.inferColumnTypes", "true")
-        .option("cloudFiles.schemaEvolutionMode", "addNewColumns")
         .option("cloudFiles.schemaLocation", f"{VOLUME_PATH}/_schemas/orders")
         .load(f"{VOLUME_PATH}/orders/")
-        .withColumn("_ingest_ts", current_timestamp())
-        .withColumn("_order_index", lit(0).cast("long"))
-        .withColumn("_source_file", col("_metadata.file_path"))
-        .withColumn("_file_mod_time", col("_metadata.file_modification_time"))
+        .select(
+            "*", # Keep all source columns
+            current_timestamp().alias("_ingest_ts"),
+            col("_metadata.file_path").alias("_source_file"),
+            col("_metadata.file_modification_time").alias("_file_mod_time")
+        )
     )
 
 @sdp.table(
@@ -48,7 +73,7 @@ def bronze_customer():
         .load(f"{VOLUME_PATH}/customers/")
         .withColumn("_ingest_ts", current_timestamp())
         .withColumn("_file_mod_time", col("_metadata.file_modification_time"))
-        .withColumn("_cust_index", lit(0).cast("long"))
+        # .withColumn("_cust_index", lit(0).cast("long"))
         .withColumn("_source_file", col("_metadata.file_path"))
     )
 
@@ -68,6 +93,6 @@ def bronze_product():
         .load(f"{VOLUME_PATH}/products/")
         .withColumn("_ingest_ts", current_timestamp())
         .withColumn("_file_mod_time", col("_metadata.file_modification_time"))
-        .withColumn("_prod_index", lit(0).cast("long"))
+        # .withColumn("_prod_index", lit(0).cast("long"))
         .withColumn("_source_file", col("_metadata.file_path"))
     )

@@ -19,7 +19,7 @@ from src.config.common.tags.silver_tags import BASE_PIPELINE_TAGS
 catalog_env = os.getenv("catalog_env", "dev")
 CATALOG     = f"ecommerce_{catalog_env}"
 SCHEMA      = "bronze"
-VOLUME_PATH = f"/Volumes/{CATALOG}/{SCHEMA}/raw_files"
+VOLUME_PATH = f"/Volumes/{CATALOG}/{SCHEMA}/source_files"
 
 table_props = {
                 **BASE_PIPELINE_TAGS,

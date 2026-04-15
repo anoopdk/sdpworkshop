@@ -1,0 +1,444 @@
+﻿[
+  {
+    "error": {
+      "exceptions": [
+        {
+          "class_name": "ModuleNotFoundError",
+          "message": "Traceback (most recent call last):\nFile \"/Workspace/dev/ecommerce/files/src/notebook/bronze/bronze_orchestration.py\", cell 1, line 8\n      2 prepare_to_execute_user_notebook_in_isolated_pipeline_module(\n      3   \"L1dvcmtzcGFjZS9kZXYvZWNvbW1lcmNlL2ZpbGVzL3NyYy9ub3RlYm9vay9icm9uemUvYnJvbnplX29yY2hlc3RyYXRpb24ucHk=\", \"bronze_orchestration_py_39a5126d\", globals(), \"DIRECT_PUBLISHING\", spark,\n      4   enable_parallel_analysis=False\n      5 )\n      7 compiled_code = compile(decode_b64('aW1wb3J0IG9zDQpmcm9tIHB5c3BhcmsgaW1wb3J0IHBpcGVsaW5lcyBhcyBzZHANCmZyb20gcHlzcGFyay5zcWwuZnVuY3Rpb25zIGltcG9ydCAqDQpmcm9tIHB5c3Bhcmsuc3FsLnR5cGVzIGltcG9ydCAqDQpmcm9tIGNvbmZpZy5jb21tb24udGFncy5icm9uemVfdGFncyBpbXBvcnQgKg0KDQpjYXRhbG9nX2VudiA9IG9zLmdldGVudigiY2F0YWxvZ19lbnYiLCAiZGV2IikNCkNBVEFMT0cgICAgID0gZiJlY29tbWVyY2Vfe2NhdGFsb2dfZW52fSINClNDSEVNQSAgICAgID0gImJyb256ZSINClZPTFVNRV9QQVRIID0gZiIvVm9sdW1lcy97Q0FUQUxPR30ve1NDSEVNQX0vcmF3X2ZpbGVzIg0KDQp0YWJsZV9wcm9wcyA9IHsNCiAgICAgICAgICAgICAgICAqKnRhZ3MsDQogICAgICAgICAgICAgICAgImRlbHRhLmVuYWJsZVJvd1RyYWNraW5nIjogInRydWUiLA0KICAgICAgICAgICAgICAgICJkZWx0YS5lbmFibGVDaGFuZ2VEYXRhRmVlZCI6ICJ0cnVlIiwNCiAgICAgICAgICAgIH0NCg0KQHNkcC50YWJsZSgNCiAgICBuYW1lPWYie0NBVEFMT0d9LntTQ0hFTUF9LmJyb256ZV9vcmRlciIsDQogICAgY29tbWVudD0iTWFzdGVyIGJyb256ZSBvcmRlcnMgc291cmNlIHRhYmxlLiIsDQogICAgdGFibGVfcHJvcGVydGllcz10YWJsZV9wcm9wcw0KKQ0KZGVmIGJyb256ZV9vcmRlcigpOg0KICAgIHJldHVybiAoDQogICAgICAgIHNwYXJrLnJlYWRTdHJlYW0uZm9ybWF0KCJjbG91ZEZpbGVzIikNCiAgICAgICAgLm9wdGlvbigiY2xvdWRGaWxlcy5mb3JtYXQiLCAiY3N2IikNCiAgICAgICAgLm9wdGlvbigiaGVhZGVyIiwgInRydWUiKQ0KICAgICAgICAub3B0aW9uKCJjbG91ZEZpbGVzLmluZmVyQ29sdW1uVHlwZXMiLCAidHJ1ZSIpDQogICAgICAgIC5vcHRpb24oImNsb3VkRmlsZXMuc2NoZW1hRXZvbHV0aW9uTW9kZSIsICJhZGROZXdDb2x1bW5zIikNCiAgICAgICAgLm9wdGlvbigiY2xvdWRGaWxlcy5zY2hlbWFMb2NhdGlvbiIsIGYie1ZPTFVNRV9QQVRIfS9fc2NoZW1hcy9vcmRlcnMiKQ0KICAgICAgICAubG9hZChmIntWT0xVTUVfUEFUSH0vb3JkZXJzLyIpDQogICAgICAgIC53aXRoQ29sdW1uKCJfaW5nZXN0X3RzIiwgY3VycmVudF90aW1lc3RhbXAoKSkNCiAgICAgICAgLndpdGhDb2x1bW4oIl9vcmRlcl9pbmRleCIsIGNvbCgiX21ldGFkYXRhLnJvd19pbmRleCIpKQ0KICAgICAgICAud2l0aENvbHVtbigiX2ZpbGVfbW9kX3RpbWUiLCBjb2woIl9tZXRhZGF0YS5maWxlX21vZGlmaWNhdGlvbl90aW1lIikpDQogICAgKQ0KDQpAc2RwLnRhYmxlKA0KICAgIG5hbWU9ZiJ7Q0FUQUxPR30ue1NDSEVNQX0uYnJvbnplX2N1c3RvbWVyIiwNCiAgICBjb21tZW50ID0gIkN1c3RvbWVyIHRhYmxlIiwNCiAgICB0YWJsZV9wcm9wZXJ0aWVzID0gdGFibGVfcHJvcHMNCikNCmRlZiBicm9uemVfY3VzdG9tZXIoKToNCiAgICByZXR1cm4oDQogICAgICAgIHNwYXJrLnJlYWRTdHJlYW0uZm9ybWF0KCJjbG91ZEZpbGVzIikNCiAgICAgICAgLm9wdGlvbigiY2xvdWRGaWxlcy5mb3JtYXQiLCAiY3N2IikNCiAgICAgICAgLm9wdGlvbigiaGVhZGVyIiwgInRydWUiKQ0KICAgICAgICAub3B0aW9uKCJjbG91ZEZpbGVzLmluZmVyQ29sdW1uVHlwZXMiLCAidHJ1ZSIpDQogICAgICAgIC5vcHRpb24oImNsb3VkRmlsZXMuc2NoZW1hTG9jYXRpb24iLCBmIntWT0xVTUVfUEFUSH0vX3NjaGVtYXMvY3VzdG9tZXJzIikNCiAgICAgICAgLmxvYWQoZiJ7Vk9MVU1FX1BBVEh9L2N1c3RvbWVycy8iKQ0KICAgICAgICAud2l0aENvbHVtbigiX2luZ2VzdF90cyIsIGN1cnJlbnRfdGltZXN0YW1wKCkpDQogICAgICAgIC53aXRoQ29sdW1uKCJfZmlsZV9tb2RfdGltZSIsIGNvbCgiX21ldGFkYXRhLmZpbGVfbW9kaWZpY2F0aW9uX3RpbWUiKSkNCiAgICAgICAgLndpdGhDb2x1bW4oIl9jdXN0X2luZGV4IiwgY29sKCJfbWV0YWRhdGEucm93X2luZGV4IikpDQogICAgKQ0KDQpAc2RwLnRhYmxlKA0KICAgIG5hbWU9ZiJ7Q0FUQUxPR30ue1NDSEVNQX0uYnJvbnplX3Byb2R1Y3QiLA0KICAgIGNvbW1lbnQ9IkNoYW5nZSBEYXRhIENhcHR1cmUgZmVlZCBmb3IgdGhlIFByb2R1Y3QgY2F0YWxvZ3VlIGRpbWVuc2lvbi4gIg0KICAgICAgICAgICAgIkNvbnRhaW5zIElOU0VSVCAvIFVQREFURSAvIERFTEVURSBvcGVyYXRpb25zIHdpdGggY2RjX3RpbWVzdGFtcCBhbmQgb3BlcmF0aW9uIGNvbHVtbnMuIiwNCiAgICB0YWJsZV9wcm9wZXJ0aWVzPXRhYmxlX3Byb3BzDQopDQpkZWYgYnJvbnplX3Byb2R1Y3QoKToNCiAgICByZXR1cm4gKA0KICAgICAgICBzcGFyay5yZWFkU3RyZWFtLmZvcm1hdCgiY2xvdWRGaWxlcyIpDQogICAgICAgIC5vcHRpb24oImNsb3VkRmlsZXMuZm9ybWF0IiwgImNzdiIpDQogICAgICAgIC5vcHRpb24oImhlYWRlciIsICJ0cnVlIikNCiAgICAgICAgLm9wdGlvbigiY2xvdWRGaWxlcy5pbmZlckNvbHVtblR5cGVzIiwgInRydWUiKQ0KICAgICAgICAub3B0aW9uKCJjbG91ZEZpbGVzLnNjaGVtYUxvY2F0aW9uIiwgZiJ7Vk9MVU1FX1BBVEh9L19zY2hlbWFzL2NkY19ldmVudCIpDQogICAgICAgIC5sb2FkKGYie1ZPTFVNRV9QQVRIfS9jZGNfZXZlbnQvIikNCiAgICAgICAgLndpdGhDb2x1bW4oIl9pbmdlc3RfdHMiLCBjdXJyZW50X3RpbWVzdGFtcCgpKQ0KICAgICAgICAud2l0aENvbHVtbigiX2ZpbGVfbW9kX3RpbWUiLCBjb2woIl9tZXRhZGF0YS5maWxlX21vZGlmaWNhdGlvbl90aW1lIikpDQogICAgICAgIC53aXRoQ29sdW1uKCJfcHJvZF9pbmRleCIsIGNvbCgiX21ldGFkYXRhLnJvd19pbmRleCIpKQ0KICAgICkNCg=='), '\u003ccommand-8589934593\u003e', mode='exec')\n----\u003e 8 exec(compiled_code, sys.modules['bronze_orchestration_py_39a5126d'].__dict__)\n     10 from dlt.repl_management import post_user_notebook_in_isolated_pipeline_module\n     11 post_user_notebook_in_isolated_pipeline_module(\"L1dvcmtzcGFjZS9kZXYvZWNvbW1lcmNlL2ZpbGVzL3NyYy9ub3RlYm9vay9icm9uemUvYnJvbnplX29yY2hlc3RyYXRpb24ucHk=\", spark)\n\nFile \"/Workspace/dev/ecommerce/files/src/notebook/bronze/bronze_orchestration.py\", cell 1, line 5\n\n\nModuleNotFoundError: No module named 'config'"
+        }
+      ],
+      "fatal": true
+    },
+    "event_type": "update_progress",
+    "id": "f387b550-36af-11f1-824c-9218f3b8367b",
+    "level": "ERROR",
+    "maturity_level": "STABLE",
+    "message": "Update 013f0f is FAILED.",
+    "origin": {
+      "cloud": "AWS",
+      "cluster_id": "0412-204030-va50ga4m-v2n",
+      "org_id": 1782094926787982,
+      "pipeline_id": "6184e312-5926-41ef-b0da-92b995d3edb1",
+      "pipeline_name": "dev_anoopdk_sdp-ecommerce_e2e_dev",
+      "region": "us-east-2",
+      "request_id": "013f0fcf-1c15-4926-83d0-f3c3f6ec18a4",
+      "update_id": "013f0fcf-1c15-4926-83d0-f3c3f6ec18a4"
+    },
+    "sequence": {
+      "control_plane_seq_no": 1776026476405001,
+      "data_plane_id": {
+        "instance": "execution",
+        "seq_no": 1776026446388011
+      }
+    },
+    "timestamp": "2026-04-12T20:41:15.813Z"
+  },
+  {
+    "error": {
+      "exceptions": [
+        {
+          "class_name": "NameError",
+          "message": "Traceback (most recent call last):\nFile \"/Workspace/dev/ecommerce/files/src/silver/silver_transformation.py\", cell 1, line 8\n      2 prepare_to_execute_user_notebook_in_isolated_pipeline_module(\n      3   \"L1dvcmtzcGFjZS9kZXYvZWNvbW1lcmNlL2ZpbGVzL3NyYy9zaWx2ZXIvc2lsdmVyX3RyYW5zZm9ybWF0aW9uLnB5\", \"silver_transformation_py_ed2c4273\", globals(), \"DIRECT_PUBLISHING\", spark,\n      4   enable_parallel_analysis=False\n      5 )\n      7 compiled_code = compile(decode_b64('aW1wb3J0IG9zCmltcG9ydCBzeXMKCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiMgTWFrZSB0aGUgcmVwby1yb290ICJjb25maWciIHBhY2thZ2UgaW1wb3J0YWJsZSByZWdhcmRsZXNzIG9mIHdvcmtpbmcgZGlyCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCnN5cy5wYXRoLmluc2VydCgwLCAiL1dvcmtzcGFjZS9kZXYvZWNvbW1lcmNlL2ZpbGVzIikKCmZyb20gcHlzcGFyayBpbXBvcnQgcGlwZWxpbmVzIGFzIHNkcApmcm9tIHB5c3Bhcmsuc3FsLmZ1bmN0aW9ucyBpbXBvcnQgKgpmcm9tIHB5c3Bhcmsuc3FsLnR5cGVzIGltcG9ydCAqCgpmcm9tIGNvbmZpZy5leHBlY3Quc2lsdmVyX2V4cGVjdCBpbXBvcnQgKAogICAgU0lMVkVSX09SREVSU19FWFBFQ1RBVElPTlMsCiAgICBTSUxWRVJfQ1VTVE9NRVJTX0VYUEVDVEFUSU9OUywKKQoKZnJvbSB1dGlscy5oZWxwZXJfZXhwZWN0IGltcG9ydCBhcHBseV9leHBlY3RhdGlvbnMKIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KIyBFbnZpcm9ubWVudCBzZXR1cAojIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpjYXRhbG9nX2VudiA9IG9zLmdldGVudigiY2F0YWxvZ19lbnYiLCAiZGV2IikKQ0FUQUxPRyAgICAgPSBmImVjb21tZXJjZV97Y2F0YWxvZ19lbnZ9IgpTQ0hFTUEgICAgICA9ICJicm9uemUiClZPTFVNRV9QQVRIID0gZiIvVm9sdW1lcy97Q0FUQUxPR30ve1NDSEVNQX0vcmF3X2ZpbGVzIgoKCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiMgRGVjb3JhdG9yIEZhY3Rvcnk6IEFwcGx5IEV4cGVjdGF0aW9ucyBDbGVhbmx5CiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiMgZGVmIGFwcGx5X2V4cGVjdGF0aW9ucyhleHBlY3RhdGlvbnM6IGRpY3QpOgojICAgICAiIiIKIyAgICAgQ29udmVydHMgZXhwZWN0YXRpb24gY29uZmlnIGludG8gY2hhaW5lZCBTRFAgZGVjb3JhdG9ycy4KIyAgICAgIiIiCiMgICAgIGRlZiBkZWNvcmF0b3IoZm4pOgojICAgICAgICAgZm9yIG5hbWUsIGNvbmRpdGlvbiBpbiBleHBlY3RhdGlvbnMuZ2V0KCJleHBlY3QiLCB7fSkuaXRlbXMoKToKIyAgICAgICAgICAgICBmbiA9IHNkcC5leHBlY3QobmFtZSwgY29uZGl0aW9uKShmbikKCiMgICAgICAgICBmb3IgbmFtZSwgY29uZGl0aW9uIGluIGV4cGVjdGF0aW9ucy5nZXQoImV4cGVjdF9vcl9kcm9wIiwge30pLml0ZW1zKCk6CiMgICAgICAgICAgICAgZm4gPSBzZHAuZXhwZWN0X29yX2Ryb3AobmFtZSwgY29uZGl0aW9uKShmbikKCiMgICAgICAgICBmb3IgbmFtZSwgY29uZGl0aW9uIGluIGV4cGVjdGF0aW9ucy5nZXQoImV4cGVjdF9vcl9mYWlsIiwge30pLml0ZW1zKCk6CiMgICAgICAgICAgICAgZm4gPSBzZHAuZXhwZWN0X29yX2ZhaWwobmFtZSwgY29uZGl0aW9uKShmbikKCiMgICAgICAgICByZXR1cm4gZm4KCiMgICAgIHJldHVybiBkZWNvcmF0b3IKCgojIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQojIFNJTFZFUiBUQUJMRSAxOiBDbGVhbmVkIE9yZGVycwojIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQpAc2RwLm1hdGVyaWFsaXplZF92aWV3KAogICAgbmFtZT1mIntDQVRBTE9HfS5zaWx2ZXIuc2lsdmVyX29yZGVycyIsCiAgICBjb21tZW50PSJDbGVhbmVkIGFuZCBlbnJpY2hlZCBvcmRlcnMuIEludmFsaWQgcmVjb3JkcyBhcmUgZHJvcHBlZC4iLAogICAgdGFibGVfcHJvcGVydGllcz17InF1YWxpdHkiOiAic2lsdmVyIn0KKQpAYXBwbHlfZXhwZWN0YXRpb25zKFNJTFZFUl9PUkRFUlNfRVhQRUNUQVRJT05TKQpkZWYgc2lsdmVyX29yZGVycygpOgogICAgcmV0dXJuICgKICAgICAgICBzcGFyay5yZWFkLnRhYmxlKGYie0NBVEFMT0d9LntTQ0hFTUF9LmJyb256ZV9vcmRlciIpCiAgICAgICAgLndpdGhDb2x1bW4oInRvdGFsX2Ftb3VudCIsIGNvbCgicXVhbnRpdHkiKSAqIGNvbCgidW5pdF9wcmljZSIpKQogICAgICAgIC53aXRoQ29sdW1uKCJvcmRlcl9kYXRlIiwgdG9fZGF0ZShjb2woIm9yZGVyX2RhdGUiKSwgInl5eXktTU0tZGQiKSkKICAgICAgICAud2l0aENvbHVtbigib3JkZXJfeWVhciIsIHllYXIoY29sKCJvcmRlcl9kYXRlIikpKQogICAgICAgIC53aXRoQ29sdW1uKCJvcmRlcl9tb250aCIsIG1vbnRoKGNvbCgib3JkZXJfZGF0ZSIpKSkKICAgICAgICAuc2VsZWN0KAogICAgICAgICAgICAib3JkZXJfaWQiLCAiY3VzdG9tZXJfaWQiLCAicHJvZHVjdF9pZCIsCiAgICAgICAgICAgICJxdWFudGl0eSIsICJ1bml0X3ByaWNlIiwgInRvdGFsX2Ftb3VudCIsCiAgICAgICAgICAgICJvcmRlcl9zdGF0dXMiLCAib3JkZXJfZGF0ZSIsICJvcmRlcl95ZWFyIiwgIm9yZGVyX21vbnRoIiwKICAgICAgICAgICAgInBheW1lbnRfbWV0aG9kIiwgInNoaXBwaW5nX2NpdHkiCiAgICAgICAgKQogICAgKQoKCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiMgU0lMVkVSIFRBQkxFIDI6IENsZWFuZWQgQ3VzdG9tZXJzCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCkBzZHAubWF0ZXJpYWxpemVkX3ZpZXcoCiAgICBuYW1lPWYie0NBVEFMT0d9LnNpbHZlci5zaWx2ZXJfY3VzdG9tZXJzIiwKICAgIGNvbW1lbnQ9IkNsZWFuZWQgY3VzdG9tZXIgcHJvZmlsZXMgd2l0aCBzdGFuZGFyZGlzZWQgZmllbGRzLiIsCiAgICB0YWJsZV9wcm9wZXJ0aWVzPXsicXVhbGl0eSI6ICJzaWx2ZXIifQopCkBhcHBseV9leHBlY3RhdGlvbnMoU0lMVkVSX0NVU1RPTUVSU19FWFBFQ1RBVElPTlMpCmRlZiBzaWx2ZXJfY3VzdG9tZXJzKCk6CiAgICByZXR1cm4gKAogICAgICAgIHNwYXJrLnJlYWQudGFibGUoZiJ7Q0FUQUxPR30ue1NDSEVNQX0uYnJvbnplX2N1c3RvbWVyIikKICAgICAgICAud2l0aENvbHVtbigic2lnbnVwX2RhdGUiLCB0b19kYXRlKGNvbCgic2lnbnVwX2RhdGUiKSwgInl5eXktTU0tZGQiKSkKICAgICAgICAud2l0aENvbHVtbigidGllciIsIHVwcGVyKGNvbCgidGllciIpKSkKICAgICAgICAud2l0aENvbHVtbigiY2l0eSIsIGluaXRjYXAoY29sKCJjaXR5IikpKQogICAgICAgIC5zZWxlY3QoCiAgICAgICAgICAgICJjdXN0b21lcl9pZCIsICJjdXN0b21lcl9uYW1lIiwgImVtYWlsIiwKICAgICAgICAgICAgInNpZ251cF9kYXRlIiwgInRpZXIiLCAiY2l0eSIsICJpc19hY3RpdmUiCiAgICAgICAgKQogICAgKQoKCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCiMgU0lMVkVSIFRBQkxFIDM6IFNDRCBUeXBlLTIgQ3VzdG9tZXIgRGltZW5zaW9uCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tCgojIERlY2xhcmUgdGhlIHRhcmdldCB0YWJsZQpzZHAuY3JlYXRlX3N0cmVhbWluZ190YWJsZSgKICAgIG5hbWU9ZiJ7Q0FUQUxPR30uc2lsdmVyLnNpbHZlcl9jdXN0b21lcl9kaW1fc2NkMiIsCiAgICBjb21tZW50PSJTQ0QgVHlwZSAyIGZvciBjdXN0b21lcnMuIFRyYWNrcyBmdWxsIGhpc3Rvcnkgb2YgY2hhbmdlcy4iCikKCiMgRGVmaW5lIENEQyBmbG93CnNkcC5jcmVhdGVfYXV0b19jZGNfZmxvdygKICAgIHRhcmdldD1mIntDQVRBTE9HfS5zaWx2ZXIuc2lsdmVyX2N1c3RvbWVyX2RpbV9zY2QyIiwKICAgIHNvdXJjZT1mIntDQVRBTE9HfS57U0NIRU1BfS5icm9uemVfY3VzdG9tZXJfY2RjIiwKICAgIGtleXM9WyJjdXN0b21lcl9pZCJdLAogICAgc2VxdWVuY2VfYnk9Y29sKCJjZGNfdGltZXN0YW1wIiksCiAgICBhcHBseV9hc19kZWxldGVzPWV4cHIoIm9wZXJhdGlvbiA9ICdERUxFVEUnIiksCiAgICBleGNlcHRfY29sdW1uX2xpc3Q9WyJvcGVyYXRpb24iLCAiY2RjX3RpbWVzdGFtcCJdLAogICAgc3RvcmVkX2FzX3NjZF90eXBlPTIKKQoKIyBpbXBvcnQgb3MKIyBmcm9tIHB5c3BhcmsgaW1wb3J0IHBpcGVsaW5lcyBhcyBzZHAKIyBmcm9tIHB5c3Bhcmsuc3FsLmZ1bmN0aW9ucyBpbXBvcnQgKgojIGZyb20gcHlzcGFyay5zcWwudHlwZXMgaW1wb3J0ICoKCiMgY2F0YWxvZ19lbnYgPSBvcy5nZXRlbnYoImNhdGFsb2dfZW52IiwgImRldiIpCiMgQ0FUQUxPRyAgICAgPSBmImVjb21tZXJjZV97Y2F0YWxvZ19lbnZ9IgojIFNDSEVNQSAgICAgID0gImJyb256ZSIKIyBWT0xVTUVfUEFUSCA9IGYiL1ZvbHVtZXMve0NBVEFMT0d9L3tTQ0hFTUF9L3Jhd19maWxlcyIKCiMgQHNkcC5tYXRlcmlhbGl6ZWRfdmlldygKIyAgICAgbmFtZT1mIntDQVRBTE9HfS5zaWx2ZXIuc2lsdmVyX29yZGVycyIsCiMgICAgIGNvbW1lbnQ9IkNsZWFuZWQgYW5kIGVucmljaGVkIG9yZGVycy4gSW52YWxpZCByZWNvcmRzIGFyZSBkcm9wcGVkLiIsCiMgICAgIHRhYmxlX3Byb3BlcnRpZXM9eyJxdWFsaXR5IjogInNpbHZlciJ9CiMgKQojIEBzZHAuZXhwZWN0KCJ2YWxpZF9vcmRlcl9pZCIsICJvcmRlcl9pZCBJUyBOT1QgTlVMTCIpCiMgQHNkcC5leHBlY3Rfb3JfZHJvcCgicG9zaXRpdmVfcXVhbnRpdHkiLCAicXVhbnRpdHkgPiAwIikKIyBAc2RwLmV4cGVjdF9vcl9kcm9wKCJwb3NpdGl2ZV9wcmljZSIsICJ1bml0X3ByaWNlID4gMCIpCiMgQHNkcC5leHBlY3QoInZhbGlkX2RhdGUiLCAib3JkZXJfZGF0ZSBJUyBOT1QgTlVMTCIpCiMgZGVmIHNpbHZlcl9vcmRlcnMoKToKIyAgICAgcmV0dXJuICgKIyAgICAgICAgIHNwYXJrLnJlYWQudGFibGUoZiJ7Q0FUQUxPR30ue1NDSEVNQX0uYnJvbnplX29yZGVyIikKIyAgICAgICAgIC53aXRoQ29sdW1uKCJ0b3RhbF9hbW91bnQiLCBjb2woInF1YW50aXR5IikgKiBjb2woInVuaXRfcHJpY2UiKSkKIyAgICAgICAgIC53aXRoQ29sdW1uKCJvcmRlcl9kYXRlIiwgdG9fZGF0ZShjb2woIm9yZGVyX2RhdGUiKSwgInl5eXktTU0tZGQiKSkKIyAgICAgICAgIC53aXRoQ29sdW1uKCJvcmRlcl95ZWFyIiwgeWVhcihjb2woIm9yZGVyX2RhdGUiKSkpCiMgICAgICAgICAud2l0aENvbHVtbigib3JkZXJfbW9udGgiLCBtb250aChjb2woIm9yZGVyX2RhdGUiKSkpCiMgICAgICAgICAuc2VsZWN0KAojICAgICAgICAgICAgICJvcmRlcl9pZCIsICJjdXN0b21lcl9pZCIsICJwcm9kdWN0X2lkIiwKIyAgICAgICAgICAgICAicXVhbnRpdHkiLCAidW5pdF9wcmljZSIsICJ0b3RhbF9hbW91bnQiLAojICAgICAgICAgICAgICJvcmRlcl9zdGF0dXMiLCAib3JkZXJfZGF0ZSIsICJvcmRlcl95ZWFyIiwgIm9yZGVyX21vbnRoIiwKIyAgICAgICAgICAgICAicGF5bWVudF9tZXRob2QiLCAic2hpcHBpbmdfY2l0eSIKIyAgICAgICAgICkKIyAgICAgKQoKIyAjIC0tLSBTSUxWRVIgVEFCTEUgMjogQ2xlYW5lZCBDdXN0b21lcnMgLS0tCiMgQHNkcC5tYXRlcmlhbGl6ZWRfdmlldygKIyAgICAgbmFtZT1mIntDQVRBTE9HfS5zaWx2ZXIuc2lsdmVyX2N1c3RvbWVycyIsCiMgICAgIGNvbW1lbnQ9IkNsZWFuZWQgY3VzdG9tZXIgcHJvZmlsZXMgd2l0aCBzdGFuZGFyZGlzZWQgZmllbGRzLiIsCiMgICAgIHRhYmxlX3Byb3BlcnRpZXM9eyJxdWFsaXR5IjogInNpbHZlciJ9CiMgKQojIEBzZHAuZXhwZWN0X29yX2ZhaWwoImN1c3RvbWVyX2lkX25vdF9udWxsIiwgImN1c3RvbWVyX2lkIElTIE5PVCBOVUxMIikKIyBAc2RwLmV4cGVjdCgidmFsaWRfZW1haWwiLCAiZW1haWwgTElLRSAnJUAlJyIpCiMgZGVmIHNpbHZlcl9jdXN0b21lcnMoKToKIyAgICAgcmV0dXJuICgKIyAgICAgICAgIHNwYXJrLnJlYWQudGFibGUoZiJ7Q0FUQUxPR30ue1NDSEVNQX0uYnJvbnplX2N1c3RvbWVyIikKIyAgICAgICAgIC53aXRoQ29sdW1uKCJzaWdudXBfZGF0ZSIsIHRvX2RhdGUoY29sKCJzaWdudXBfZGF0ZSIpLCAieXl5eS1NTS1kZCIpKQojICAgICAgICAgLndpdGhDb2x1bW4oInRpZXIiLCB1cHBlcihjb2woInRpZXIiKSkpCiMgICAgICAgICAud2l0aENvbHVtbigiY2l0eSIsIGluaXRjYXAoY29sKCJjaXR5IikpKQojICAgICAgICAgLnNlbGVjdCgKIyAgICAgICAgICAgICAiY3VzdG9tZXJfaWQiLCAiY3VzdG9tZXJfbmFtZSIsICJlbWFpbCIsCiMgICAgICAgICAgICAgInNpZ251cF9kYXRlIiwgInRpZXIiLCAiY2l0eSIsICJpc19hY3RpdmUiCiMgICAgICAgICApCiMgICAgICkKCiMgIyBEZWNsYXJlIHRoZSB0YXJnZXQgdGFibGUgZmlyc3QKIyBzZHAuY3JlYXRlX3N0cmVhbWluZ190YWJsZSgKIyAgICAgbmFtZT1mIntDQVRBTE9HfS5zaWx2ZXIuc2lsdmVyX2N1c3RvbWVyX2RpbV9zY2QyIiwKIyAgICAgY29tbWVudD0iU0NEIFR5cGUgMiBmb3IgY3VzdG9tZXJzLiBUcmFja3MgZnVsbCBoaXN0b3J5IG9mIGNoYW5nZXMuIgojICkKCiMgIyBUaGVuIGRlZmluZSB0aGUgQ0RDIGZsb3cKIyBzZHAuY3JlYXRlX2F1dG9fY2RjX2Zsb3coCiMgICAgIHRhcmdldD1mIntDQVRBTE9HfS5zaWx2ZXIuc2lsdmVyX2N1c3RvbWVyX2RpbV9zY2QyIiwKIyAgICAgc291cmNlPWYie0NBVEFMT0d9LntTQ0hFTUF9LmJyb256ZV9jdXN0b21lcl9jZGMiLAojICAgICBrZXlzPVsiY3VzdG9tZXJfaWQiXSwKIyAgICAgc2VxdWVuY2VfYnk9Y29sKCJjZGNfdGltZXN0YW1wIiksCiMgICAgIGFwcGx5X2FzX2RlbGV0ZXM9ZXhwcigib3BlcmF0aW9uID0gJ0RFTEVURSciKSwKIyAgICAgZXhjZXB0X2NvbHVtbl9saXN0PVsib3BlcmF0aW9uIiwgImNkY190aW1lc3RhbXAiXSwKIyAgICAgc3RvcmVkX2FzX3NjZF90eXBlPTIKIyApCg=='), '\u003ccommand-8589934593\u003e', mode='exec')\n----\u003e 8 exec(compiled_code, sys.modules['silver_transformation_py_ed2c4273'].__dict__)\n     10 from dlt.repl_management import post_user_notebook_in_isolated_pipeline_module\n     11 post_user_notebook_in_isolated_pipeline_module(\"L1dvcmtzcGFjZS9kZXYvZWNvbW1lcmNlL2ZpbGVzL3NyYy9zaWx2ZXIvc2lsdmVyX3RyYW5zZm9ybWF0aW9uLnB5\", spark)\n\nFile \"/Workspace/dev/ecommerce/files/src/silver/silver_transformation.py\", cell 1, line 58\n\n\nFile \"/Workspace/dev/ecommerce/files/utils/helper_expect.py\", line 10, in apply_expectations.\u003clocals\u003e.decorator(fn)\n      8 def decorator(fn):\n      9     for name, condition in expectations.get(\"expect\", {}).items():\n---\u003e 10         fn = sdp.expect(name, condition)(fn)\n     12     for name, condition in expectations.get(\"expect_or_drop\", {}).items():\n     13         fn = sdp.expect_or_drop(name, condition)(fn)\n\nNameError: name 'sdp' is not defined"
+        }
+      ],
+      "fatal": true
+    },
+    "event_type": "update_progress",
+    "id": "559eef00-3067-11f1-909d-2651f7e64592",
+    "level": "ERROR",
+    "maturity_level": "STABLE",
+    "message": "Update 2c3509 is FAILED.",
+    "origin": {
+      "cloud": "AWS",
+      "cluster_id": "0404-204523-mn173pzc-v2n",
+      "org_id": 1782094926787982,
+      "pipeline_id": "6184e312-5926-41ef-b0da-92b995d3edb1",
+      "pipeline_name": "dev_anoopdk_sdp-ecommerce_e2e_dev",
+      "region": "us-east-2",
+      "request_id": "2c35093b-7d88-43d8-bbcc-467abf626d78",
+      "update_id": "2c35093b-7d88-43d8-bbcc-467abf626d78"
+    },
+    "sequence": {
+      "control_plane_seq_no": 1775335580525001,
+      "data_plane_id": {
+        "instance": "execution",
+        "seq_no": 1775335544960010
+      }
+    },
+    "timestamp": "2026-04-04T20:46:20.144Z"
+  },
+  {
+    "error": {
+      "exceptions": [
+        {
+          "class_name": "NameError",
+          "message": "Traceback (most recent call last):\nFile \"/Workspace/dev/ecommerce/files/src/silver/silver_transformation.py\", cell 1, line 8\n      2 prepare_to_execute_user_notebook_in_isolated_pipeline_module(\n      3   \"L1dvcmtzcGFjZS9kZXYvZWNvbW1lcmNlL2ZpbGVzL3NyYy9zaWx2ZXIvc2lsdmVyX3RyYW5zZm9ybWF0aW9uLnB5\", \"silver_transformation_py_9b1439e6\", globals(), \"DIRECT_PUBLISHING\", spark,\n      4   enable_parallel_analysis=False\n      5 )\n      7 compiled_code = compile(decode_b64('aW1wb3J0IG9zDQppbXBvcnQgc3lzDQoNCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQojIE1ha2UgdGhlIHJlcG8tcm9vdCAiY29uZmlnIiBwYWNrYWdlIGltcG9ydGFibGUgcmVnYXJkbGVzcyBvZiB3b3JraW5nIGRpcg0KIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCnN5cy5wYXRoLmluc2VydCgwLCBvcy5wYXRoLmpvaW4ob3MucGF0aC5kaXJuYW1lKF9fZmlsZV9fKSwgIi4uIiwgIi4uIikpDQoNCmZyb20gcHlzcGFyayBpbXBvcnQgcGlwZWxpbmVzIGFzIHNkcA0KZnJvbSBweXNwYXJrLnNxbC5mdW5jdGlvbnMgaW1wb3J0ICoNCmZyb20gcHlzcGFyay5zcWwudHlwZXMgaW1wb3J0ICoNCg0KZnJvbSBjb25maWcuZXhwZWN0LnNpbHZlcl9leHBlY3QgaW1wb3J0ICgNCiAgICBTSUxWRVJfT1JERVJTX0VYUEVDVEFUSU9OUywNCiAgICBTSUxWRVJfQ1VTVE9NRVJTX0VYUEVDVEFUSU9OUywNCikNCg0KZnJvbSB1dGlscy5oZWxwZXJfZXhwZWN0IGltcG9ydCBhcHBseV9leHBlY3RhdGlvbnMNCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQojIEVudmlyb25tZW50IHNldHVwDQojIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KY2F0YWxvZ19lbnYgPSBvcy5nZXRlbnYoImNhdGFsb2dfZW52IiwgImRldiIpDQpDQVRBTE9HICAgICA9IGYiZWNvbW1lcmNlX3tjYXRhbG9nX2Vudn0iDQpTQ0hFTUEgICAgICA9ICJicm9uemUiDQpWT0xVTUVfUEFUSCA9IGYiL1ZvbHVtZXMve0NBVEFMT0d9L3tTQ0hFTUF9L3Jhd19maWxlcyINCg0KDQojIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KIyBEZWNvcmF0b3IgRmFjdG9yeTogQXBwbHkgRXhwZWN0YXRpb25zIENsZWFubHkNCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQojIGRlZiBhcHBseV9leHBlY3RhdGlvbnMoZXhwZWN0YXRpb25zOiBkaWN0KToNCiMgICAgICIiIg0KIyAgICAgQ29udmVydHMgZXhwZWN0YXRpb24gY29uZmlnIGludG8gY2hhaW5lZCBTRFAgZGVjb3JhdG9ycy4NCiMgICAgICIiIg0KIyAgICAgZGVmIGRlY29yYXRvcihmbik6DQojICAgICAgICAgZm9yIG5hbWUsIGNvbmRpdGlvbiBpbiBleHBlY3RhdGlvbnMuZ2V0KCJleHBlY3QiLCB7fSkuaXRlbXMoKToNCiMgICAgICAgICAgICAgZm4gPSBzZHAuZXhwZWN0KG5hbWUsIGNvbmRpdGlvbikoZm4pDQoNCiMgICAgICAgICBmb3IgbmFtZSwgY29uZGl0aW9uIGluIGV4cGVjdGF0aW9ucy5nZXQoImV4cGVjdF9vcl9kcm9wIiwge30pLml0ZW1zKCk6DQojICAgICAgICAgICAgIGZuID0gc2RwLmV4cGVjdF9vcl9kcm9wKG5hbWUsIGNvbmRpdGlvbikoZm4pDQoNCiMgICAgICAgICBmb3IgbmFtZSwgY29uZGl0aW9uIGluIGV4cGVjdGF0aW9ucy5nZXQoImV4cGVjdF9vcl9mYWlsIiwge30pLml0ZW1zKCk6DQojICAgICAgICAgICAgIGZuID0gc2RwLmV4cGVjdF9vcl9mYWlsKG5hbWUsIGNvbmRpdGlvbikoZm4pDQoNCiMgICAgICAgICByZXR1cm4gZm4NCg0KIyAgICAgcmV0dXJuIGRlY29yYXRvcg0KDQoNCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQojIFNJTFZFUiBUQUJMRSAxOiBDbGVhbmVkIE9yZGVycw0KIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCkBzZHAubWF0ZXJpYWxpemVkX3ZpZXcoDQogICAgbmFtZT1mIntDQVRBTE9HfS5zaWx2ZXIuc2lsdmVyX29yZGVycyIsDQogICAgY29tbWVudD0iQ2xlYW5lZCBhbmQgZW5yaWNoZWQgb3JkZXJzLiBJbnZhbGlkIHJlY29yZHMgYXJlIGRyb3BwZWQuIiwNCiAgICB0YWJsZV9wcm9wZXJ0aWVzPXsicXVhbGl0eSI6ICJzaWx2ZXIifQ0KKQ0KQGFwcGx5X2V4cGVjdGF0aW9ucyhTSUxWRVJfT1JERVJTX0VYUEVDVEFUSU9OUykNCmRlZiBzaWx2ZXJfb3JkZXJzKCk6DQogICAgcmV0dXJuICgNCiAgICAgICAgc3BhcmsucmVhZC50YWJsZShmIntDQVRBTE9HfS57U0NIRU1BfS5icm9uemVfb3JkZXIiKQ0KICAgICAgICAud2l0aENvbHVtbigidG90YWxfYW1vdW50IiwgY29sKCJxdWFudGl0eSIpICogY29sKCJ1bml0X3ByaWNlIikpDQogICAgICAgIC53aXRoQ29sdW1uKCJvcmRlcl9kYXRlIiwgdG9fZGF0ZShjb2woIm9yZGVyX2RhdGUiKSwgInl5eXktTU0tZGQiKSkNCiAgICAgICAgLndpdGhDb2x1bW4oIm9yZGVyX3llYXIiLCB5ZWFyKGNvbCgib3JkZXJfZGF0ZSIpKSkNCiAgICAgICAgLndpdGhDb2x1bW4oIm9yZGVyX21vbnRoIiwgbW9udGgoY29sKCJvcmRlcl9kYXRlIikpKQ0KICAgICAgICAuc2VsZWN0KA0KICAgICAgICAgICAgIm9yZGVyX2lkIiwgImN1c3RvbWVyX2lkIiwgInByb2R1Y3RfaWQiLA0KICAgICAgICAgICAgInF1YW50aXR5IiwgInVuaXRfcHJpY2UiLCAidG90YWxfYW1vdW50IiwNCiAgICAgICAgICAgICJvcmRlcl9zdGF0dXMiLCAib3JkZXJfZGF0ZSIsICJvcmRlcl95ZWFyIiwgIm9yZGVyX21vbnRoIiwNCiAgICAgICAgICAgICJwYXltZW50X21ldGhvZCIsICJzaGlwcGluZ19jaXR5Ig0KICAgICAgICApDQogICAgKQ0KDQoNCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQojIFNJTFZFUiBUQUJMRSAyOiBDbGVhbmVkIEN1c3RvbWVycw0KIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0NCkBzZHAubWF0ZXJpYWxpemVkX3ZpZXcoDQogICAgbmFtZT1mIntDQVRBTE9HfS5zaWx2ZXIuc2lsdmVyX2N1c3RvbWVycyIsDQogICAgY29tbWVudD0iQ2xlYW5lZCBjdXN0b21lciBwcm9maWxlcyB3aXRoIHN0YW5kYXJkaXNlZCBmaWVsZHMuIiwNCiAgICB0YWJsZV9wcm9wZXJ0aWVzPXsicXVhbGl0eSI6ICJzaWx2ZXIifQ0KKQ0KQGFwcGx5X2V4cGVjdGF0aW9ucyhTSUxWRVJfQ1VTVE9NRVJTX0VYUEVDVEFUSU9OUykNCmRlZiBzaWx2ZXJfY3VzdG9tZXJzKCk6DQogICAgcmV0dXJuICgNCiAgICAgICAgc3BhcmsucmVhZC50YWJsZShmIntDQVRBTE9HfS57U0NIRU1BfS5icm9uemVfY3VzdG9tZXIiKQ0KICAgICAgICAud2l0aENvbHVtbigic2lnbnVwX2RhdGUiLCB0b19kYXRlKGNvbCgic2lnbnVwX2RhdGUiKSwgInl5eXktTU0tZGQiKSkNCiAgICAgICAgLndpdGhDb2x1bW4oInRpZXIiLCB1cHBlcihjb2woInRpZXIiKSkpDQogICAgICAgIC53aXRoQ29sdW1uKCJjaXR5IiwgaW5pdGNhcChjb2woImNpdHkiKSkpDQogICAgICAgIC5zZWxlY3QoDQogICAgICAgICAgICAiY3VzdG9tZXJfaWQiLCAiY3VzdG9tZXJfbmFtZSIsICJlbWFpbCIsDQogICAgICAgICAgICAic2lnbnVwX2RhdGUiLCAidGllciIsICJjaXR5IiwgImlzX2FjdGl2ZSINCiAgICAgICAgKQ0KICAgICkNCg0KDQojIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KIyBTSUxWRVIgVEFCTEUgMzogU0NEIFR5cGUtMiBDdXN0b21lciBEaW1lbnNpb24NCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQoNCiMgRGVjbGFyZSB0aGUgdGFyZ2V0IHRhYmxlDQpzZHAuY3JlYXRlX3N0cmVhbWluZ190YWJsZSgNCiAgICBuYW1lPWYie0NBVEFMT0d9LnNpbHZlci5zaWx2ZXJfY3VzdG9tZXJfZGltX3NjZDIiLA0KICAgIGNvbW1lbnQ9IlNDRCBUeXBlIDIgZm9yIGN1c3RvbWVycy4gVHJhY2tzIGZ1bGwgaGlzdG9yeSBvZiBjaGFuZ2VzLiINCikNCg0KIyBEZWZpbmUgQ0RDIGZsb3cNCnNkcC5jcmVhdGVfYXV0b19jZGNfZmxvdygNCiAgICB0YXJnZXQ9ZiJ7Q0FUQUxPR30uc2lsdmVyLnNpbHZlcl9jdXN0b21lcl9kaW1fc2NkMiIsDQogICAgc291cmNlPWYie0NBVEFMT0d9LntTQ0hFTUF9LmJyb256ZV9jdXN0b21lcl9jZGMiLA0KICAgIGtleXM9WyJjdXN0b21lcl9pZCJdLA0KICAgIHNlcXVlbmNlX2J5PWNvbCgiY2RjX3RpbWVzdGFtcCIpLA0KICAgIGFwcGx5X2FzX2RlbGV0ZXM9ZXhwcigib3BlcmF0aW9uID0gJ0RFTEVURSciKSwNCiAgICBleGNlcHRfY29sdW1uX2xpc3Q9WyJvcGVyYXRpb24iLCAiY2RjX3RpbWVzdGFtcCJdLA0KICAgIHN0b3JlZF9hc19zY2RfdHlwZT0yDQopDQoNCiMgaW1wb3J0IG9zDQojIGZyb20gcHlzcGFyayBpbXBvcnQgcGlwZWxpbmVzIGFzIHNkcA0KIyBmcm9tIHB5c3Bhcmsuc3FsLmZ1bmN0aW9ucyBpbXBvcnQgKg0KIyBmcm9tIHB5c3Bhcmsuc3FsLnR5cGVzIGltcG9ydCAqDQoNCiMgY2F0YWxvZ19lbnYgPSBvcy5nZXRlbnYoImNhdGFsb2dfZW52IiwgImRldiIpDQojIENBVEFMT0cgICAgID0gZiJlY29tbWVyY2Vfe2NhdGFsb2dfZW52fSINCiMgU0NIRU1BICAgICAgPSAiYnJvbnplIg0KIyBWT0xVTUVfUEFUSCA9IGYiL1ZvbHVtZXMve0NBVEFMT0d9L3tTQ0hFTUF9L3Jhd19maWxlcyINCg0KIyBAc2RwLm1hdGVyaWFsaXplZF92aWV3KA0KIyAgICAgbmFtZT1mIntDQVRBTE9HfS5zaWx2ZXIuc2lsdmVyX29yZGVycyIsDQojICAgICBjb21tZW50PSJDbGVhbmVkIGFuZCBlbnJpY2hlZCBvcmRlcnMuIEludmFsaWQgcmVjb3JkcyBhcmUgZHJvcHBlZC4iLA0KIyAgICAgdGFibGVfcHJvcGVydGllcz17InF1YWxpdHkiOiAic2lsdmVyIn0NCiMgKQ0KIyBAc2RwLmV4cGVjdCgidmFsaWRfb3JkZXJfaWQiLCAib3JkZXJfaWQgSVMgTk9UIE5VTEwiKQ0KIyBAc2RwLmV4cGVjdF9vcl9kcm9wKCJwb3NpdGl2ZV9xdWFudGl0eSIsICJxdWFudGl0eSA+IDAiKQ0KIyBAc2RwLmV4cGVjdF9vcl9kcm9wKCJwb3NpdGl2ZV9wcmljZSIsICJ1bml0X3ByaWNlID4gMCIpDQojIEBzZHAuZXhwZWN0KCJ2YWxpZF9kYXRlIiwgIm9yZGVyX2RhdGUgSVMgTk9UIE5VTEwiKQ0KIyBkZWYgc2lsdmVyX29yZGVycygpOg0KIyAgICAgcmV0dXJuICgNCiMgICAgICAgICBzcGFyay5yZWFkLnRhYmxlKGYie0NBVEFMT0d9LntTQ0hFTUF9LmJyb256ZV9vcmRlciIpDQojICAgICAgICAgLndpdGhDb2x1bW4oInRvdGFsX2Ftb3VudCIsIGNvbCgicXVhbnRpdHkiKSAqIGNvbCgidW5pdF9wcmljZSIpKQ0KIyAgICAgICAgIC53aXRoQ29sdW1uKCJvcmRlcl9kYXRlIiwgdG9fZGF0ZShjb2woIm9yZGVyX2RhdGUiKSwgInl5eXktTU0tZGQiKSkNCiMgICAgICAgICAud2l0aENvbHVtbigib3JkZXJfeWVhciIsIHllYXIoY29sKCJvcmRlcl9kYXRlIikpKQ0KIyAgICAgICAgIC53aXRoQ29sdW1uKCJvcmRlcl9tb250aCIsIG1vbnRoKGNvbCgib3JkZXJfZGF0ZSIpKSkNCiMgICAgICAgICAuc2VsZWN0KA0KIyAgICAgICAgICAgICAib3JkZXJfaWQiLCAiY3VzdG9tZXJfaWQiLCAicHJvZHVjdF9pZCIsDQojICAgICAgICAgICAgICJxdWFudGl0eSIsICJ1bml0X3ByaWNlIiwgInRvdGFsX2Ftb3VudCIsDQojICAgICAgICAgICAgICJvcmRlcl9zdGF0dXMiLCAib3JkZXJfZGF0ZSIsICJvcmRlcl95ZWFyIiwgIm9yZGVyX21vbnRoIiwNCiMgICAgICAgICAgICAgInBheW1lbnRfbWV0aG9kIiwgInNoaXBwaW5nX2NpdHkiDQojICAgICAgICAgKQ0KIyAgICAgKQ0KDQojICMgLS0tIFNJTFZFUiBUQUJMRSAyOiBDbGVhbmVkIEN1c3RvbWVycyAtLS0NCiMgQHNkcC5tYXRlcmlhbGl6ZWRfdmlldygNCiMgICAgIG5hbWU9ZiJ7Q0FUQUxPR30uc2lsdmVyLnNpbHZlcl9jdXN0b21lcnMiLA0KIyAgICAgY29tbWVudD0iQ2xlYW5lZCBjdXN0b21lciBwcm9maWxlcyB3aXRoIHN0YW5kYXJkaXNlZCBmaWVsZHMuIiwNCiMgICAgIHRhYmxlX3Byb3BlcnRpZXM9eyJxdWFsaXR5IjogInNpbHZlciJ9DQojICkNCiMgQHNkcC5leHBlY3Rfb3JfZmFpbCgiY3VzdG9tZXJfaWRfbm90X251bGwiLCAiY3VzdG9tZXJfaWQgSVMgTk9UIE5VTEwiKQ0KIyBAc2RwLmV4cGVjdCgidmFsaWRfZW1haWwiLCAiZW1haWwgTElLRSAnJUAlJyIpDQojIGRlZiBzaWx2ZXJfY3VzdG9tZXJzKCk6DQojICAgICByZXR1cm4gKA0KIyAgICAgICAgIHNwYXJrLnJlYWQudGFibGUoZiJ7Q0FUQUxPR30ue1NDSEVNQX0uYnJvbnplX2N1c3RvbWVyIikNCiMgICAgICAgICAud2l0aENvbHVtbigic2lnbnVwX2RhdGUiLCB0b19kYXRlKGNvbCgic2lnbnVwX2RhdGUiKSwgInl5eXktTU0tZGQiKSkNCiMgICAgICAgICAud2l0aENvbHVtbigidGllciIsIHVwcGVyKGNvbCgidGllciIpKSkNCiMgICAgICAgICAud2l0aENvbHVtbigiY2l0eSIsIGluaXRjYXAoY29sKCJjaXR5IikpKQ0KIyAgICAgICAgIC5zZWxlY3QoDQojICAgICAgICAgICAgICJjdXN0b21lcl9pZCIsICJjdXN0b21lcl9uYW1lIiwgImVtYWlsIiwNCiMgICAgICAgICAgICAgInNpZ251cF9kYXRlIiwgInRpZXIiLCAiY2l0eSIsICJpc19hY3RpdmUiDQojICAgICAgICAgKQ0KIyAgICAgKQ0KDQojICMgRGVjbGFyZSB0aGUgdGFyZ2V0IHRhYmxlIGZpcnN0DQojIHNkcC5jcmVhdGVfc3RyZWFtaW5nX3RhYmxlKA0KIyAgICAgbmFtZT1mIntDQVRBTE9HfS5zaWx2ZXIuc2lsdmVyX2N1c3RvbWVyX2RpbV9zY2QyIiwNCiMgICAgIGNvbW1lbnQ9IlNDRCBUeXBlIDIgZm9yIGN1c3RvbWVycy4gVHJhY2tzIGZ1bGwgaGlzdG9yeSBvZiBjaGFuZ2VzLiINCiMgKQ0KDQojICMgVGhlbiBkZWZpbmUgdGhlIENEQyBmbG93DQojIHNkcC5jcmVhdGVfYXV0b19jZGNfZmxvdygNCiMgICAgIHRhcmdldD1mIntDQVRBTE9HfS5zaWx2ZXIuc2lsdmVyX2N1c3RvbWVyX2RpbV9zY2QyIiwNCiMgICAgIHNvdXJjZT1mIntDQVRBTE9HfS57U0NIRU1BfS5icm9uemVfY3VzdG9tZXJfY2RjIiwNCiMgICAgIGtleXM9WyJjdXN0b21lcl9pZCJdLA0KIyAgICAgc2VxdWVuY2VfYnk9Y29sKCJjZGNfdGltZXN0YW1wIiksDQojICAgICBhcHBseV9hc19kZWxldGVzPWV4cHIoIm9wZXJhdGlvbiA9ICdERUxFVEUnIiksDQojICAgICBleGNlcHRfY29sdW1uX2xpc3Q9WyJvcGVyYXRpb24iLCAiY2RjX3RpbWVzdGFtcCJdLA0KIyAgICAgc3RvcmVkX2FzX3NjZF90eXBlPTINCiMgKQ0K'), '\u003ccommand-8589934593\u003e', mode='exec')\n----\u003e 8 exec(compiled_code, sys.modules['silver_transformation_py_9b1439e6'].__dict__)\n     10 from dlt.repl_management import post_user_notebook_in_isolated_pipeline_module\n     11 post_user_notebook_in_isolated_pipeline_module(\"L1dvcmtzcGFjZS9kZXYvZWNvbW1lcmNlL2ZpbGVzL3NyYy9zaWx2ZXIvc2lsdmVyX3RyYW5zZm9ybWF0aW9uLnB5\", spark)\n\nFile \"/Workspace/dev/ecommerce/files/src/silver/silver_transformation.py\", cell 1, line 7\n\n\nNameError: name '__file__' is not defined"
+        }
+      ],
+      "fatal": true
+    },
+    "event_type": "update_progress",
+    "id": "28a44e10-3066-11f1-a59a-fe72ff0df56e",
+    "level": "ERROR",
+    "maturity_level": "STABLE",
+    "message": "Update 5aa7ce is FAILED.",
+    "origin": {
+      "cloud": "AWS",
+      "cluster_id": "0404-203708-wfrjb1gk-v2n",
+      "org_id": 1782094926787982,
+      "pipeline_id": "6184e312-5926-41ef-b0da-92b995d3edb1",
+      "pipeline_name": "dev_anoopdk_sdp-ecommerce_e2e_dev",
+      "region": "us-east-2",
+      "request_id": "5aa7ce64-d4af-4e26-8e83-723f7ecc367e",
+      "update_id": "5aa7ce64-d4af-4e26-8e83-723f7ecc367e"
+    },
+    "sequence": {
+      "control_plane_seq_no": 1775335075985001,
+      "data_plane_id": {
+        "instance": "execution",
+        "seq_no": 1775335045896010
+      }
+    },
+    "timestamp": "2026-04-04T20:37:55.185Z"
+  },
+  {
+    "error": {
+      "exceptions": [
+        {
+          "class_name": "pyspark.errors.exceptions.captured.AnalysisException",
+          "message": "Traceback (most recent call last):\n  File \"/Workspace/dev/ecommerce/files/src/bronze/bronze_orchestration.py\", cell 1, line 22, in bronze_order\npyspark.errors.exceptions.captured.AnalysisException: [NO_SUCH_CATALOG_EXCEPTION] Catalog 'ecommerce_${var.catalog_env}' was not found. Please verify the catalog name and then retry the query or command again. SQLSTATE: 42704"
+        }
+      ],
+      "fatal": true
+    },
+    "event_type": "update_progress",
+    "id": "78a66580-2fab-11f1-929b-8a22ba47c449",
+    "level": "ERROR",
+    "maturity_level": "STABLE",
+    "message": "Update 227f51 has failed. Failed to analyze flow 'ecommerce_.bronze.bronze_order' and 2 other flow(s)..",
+    "origin": {
+      "cloud": "AWS",
+      "cluster_id": "0403-222035-42txhuxr-v2n",
+      "org_id": 1782094926787982,
+      "pipeline_id": "6184e312-5926-41ef-b0da-92b995d3edb1",
+      "pipeline_name": "dev_anoopdk_sdp-ecommerce_e2e",
+      "region": "us-east-2",
+      "request_id": "227f51ce-72ff-4a2f-b0c9-95bbc38e00a6",
+      "update_id": "227f51ce-72ff-4a2f-b0c9-95bbc38e00a6"
+    },
+    "sequence": {
+      "control_plane_seq_no": 1775254895782001,
+      "data_plane_id": {
+        "instance": "execution",
+        "seq_no": 1775254855134019
+      }
+    },
+    "timestamp": "2026-04-03T22:21:33.528Z"
+  },
+  {
+    "error": {
+      "exceptions": [
+        {
+          "class_name": "pyspark.errors.exceptions.captured.AnalysisException",
+          "message": "Traceback (most recent call last):\n  File \"/Workspace/dev/ecommerce/files/src/bronze/bronze_orchestration.py\", cell 1, line 54, in bronze_customer_cdc\npyspark.errors.exceptions.captured.AnalysisException: [NO_SUCH_CATALOG_EXCEPTION] Catalog 'ecommerce_${var.catalog_env}' was not found. Please verify the catalog name and then retry the query or command again. SQLSTATE: 42704"
+        }
+      ],
+      "fatal": true
+    },
+    "event_type": "flow_progress",
+    "id": "788ff750-2fab-11f1-929b-8a22ba47c449",
+    "level": "ERROR",
+    "maturity_level": "STABLE",
+    "message": "Failed to resolve flow: 'ecommerce_.bronze.bronze_customer_cdc'.",
+    "origin": {
+      "cloud": "AWS",
+      "cluster_id": "0403-222035-42txhuxr-v2n",
+      "flow_name": "ecommerce_.bronze.bronze_customer_cdc",
+      "org_id": 1782094926787982,
+      "pipeline_id": "6184e312-5926-41ef-b0da-92b995d3edb1",
+      "pipeline_name": "dev_anoopdk_sdp-ecommerce_e2e",
+      "region": "us-east-2",
+      "request_id": "227f51ce-72ff-4a2f-b0c9-95bbc38e00a6",
+      "update_id": "227f51ce-72ff-4a2f-b0c9-95bbc38e00a6"
+    },
+    "sequence": {
+      "control_plane_seq_no": 1775254895779001,
+      "data_plane_id": {
+        "instance": "execution",
+        "seq_no": 1775254855134016
+      }
+    },
+    "timestamp": "2026-04-03T22:21:33.381Z"
+  },
+  {
+    "error": {
+      "exceptions": [
+        {
+          "class_name": "pyspark.errors.exceptions.captured.AnalysisException",
+          "message": "Traceback (most recent call last):\n  File \"/Workspace/dev/ecommerce/files/src/bronze/bronze_orchestration.py\", cell 1, line 38, in bronze_customer\npyspark.errors.exceptions.captured.AnalysisException: [NO_SUCH_CATALOG_EXCEPTION] Catalog 'ecommerce_${var.catalog_env}' was not found. Please verify the catalog name and then retry the query or command again. SQLSTATE: 42704"
+        }
+      ],
+      "fatal": true
+    },
+    "event_type": "flow_progress",
+    "id": "788f3400-2fab-11f1-929b-8a22ba47c449",
+    "level": "ERROR",
+    "maturity_level": "STABLE",
+    "message": "Failed to resolve flow: 'ecommerce_.bronze.bronze_customer'.",
+    "origin": {
+      "cloud": "AWS",
+      "cluster_id": "0403-222035-42txhuxr-v2n",
+      "flow_name": "ecommerce_.bronze.bronze_customer",
+      "org_id": 1782094926787982,
+      "pipeline_id": "6184e312-5926-41ef-b0da-92b995d3edb1",
+      "pipeline_name": "dev_anoopdk_sdp-ecommerce_e2e",
+      "region": "us-east-2",
+      "request_id": "227f51ce-72ff-4a2f-b0c9-95bbc38e00a6",
+      "update_id": "227f51ce-72ff-4a2f-b0c9-95bbc38e00a6"
+    },
+    "sequence": {
+      "control_plane_seq_no": 1775254895777001,
+      "data_plane_id": {
+        "instance": "execution",
+        "seq_no": 1775254855134015
+      }
+    },
+    "timestamp": "2026-04-03T22:21:33.376Z"
+  },
+  {
+    "error": {
+      "exceptions": [
+        {
+          "class_name": "pyspark.errors.exceptions.captured.AnalysisException",
+          "message": "Traceback (most recent call last):\n  File \"/Workspace/dev/ecommerce/files/src/bronze/bronze_orchestration.py\", cell 1, line 22, in bronze_order\npyspark.errors.exceptions.captured.AnalysisException: [NO_SUCH_CATALOG_EXCEPTION] Catalog 'ecommerce_${var.catalog_env}' was not found. Please verify the catalog name and then retry the query or command again. SQLSTATE: 42704"
+        }
+      ],
+      "fatal": true
+    },
+    "event_type": "flow_progress",
+    "id": "788dd470-2fab-11f1-929b-8a22ba47c449",
+    "level": "ERROR",
+    "maturity_level": "STABLE",
+    "message": "Failed to resolve flow: 'ecommerce_.bronze.bronze_order'.",
+    "origin": {
+      "cloud": "AWS",
+      "cluster_id": "0403-222035-42txhuxr-v2n",
+      "flow_name": "ecommerce_.bronze.bronze_order",
+      "org_id": 1782094926787982,
+      "pipeline_id": "6184e312-5926-41ef-b0da-92b995d3edb1",
+      "pipeline_name": "dev_anoopdk_sdp-ecommerce_e2e",
+      "region": "us-east-2",
+      "request_id": "227f51ce-72ff-4a2f-b0c9-95bbc38e00a6",
+      "update_id": "227f51ce-72ff-4a2f-b0c9-95bbc38e00a6"
+    },
+    "sequence": {
+      "control_plane_seq_no": 1775254895776001,
+      "data_plane_id": {
+        "instance": "execution",
+        "seq_no": 1775254855134014
+      }
+    },
+    "timestamp": "2026-04-03T22:21:33.367Z"
+  },
+  {
+    "error": {
+      "exceptions": [
+        {
+          "class_name": "pyspark.errors.exceptions.captured.AnalysisException",
+          "message": "Traceback (most recent call last):\n  File \"/Workspace/dev/ecommerce/files/src/bronze/bronze_orchestration.py\", cell 1, line 22, in bronze_order\npyspark.errors.exceptions.captured.AnalysisException: [NO_SUCH_CATALOG_EXCEPTION] Catalog 'ecommerce_${var.catalog_env}' was not found. Please verify the catalog name and then retry the query or command again. SQLSTATE: 42704"
+        }
+      ],
+      "fatal": true
+    },
+    "event_type": "update_progress",
+    "id": "baece870-2faa-11f1-b3c4-566dcefa2bd6",
+    "level": "ERROR",
+    "maturity_level": "STABLE",
+    "message": "Update 49afe7 has failed. Failed to analyze flow 'ecommerce_.bronze.bronze_order' and 2 other flow(s)..",
+    "origin": {
+      "cloud": "AWS",
+      "cluster_id": "0403-221522-tsy22q4k-v2n",
+      "org_id": 1782094926787982,
+      "pipeline_id": "6184e312-5926-41ef-b0da-92b995d3edb1",
+      "pipeline_name": "dev_anoopdk_sdp-ecommerce_e2e",
+      "region": "us-east-2",
+      "request_id": "49afe770-e973-460a-a75b-251c75285e56",
+      "update_id": "49afe770-e973-460a-a75b-251c75285e56"
+    },
+    "sequence": {
+      "control_plane_seq_no": 1775254577690001,
+      "data_plane_id": {
+        "instance": "execution",
+        "seq_no": 1775254536977019
+      }
+    },
+    "timestamp": "2026-04-03T22:16:15.223Z"
+  },
+  {
+    "error": {
+      "exceptions": [
+        {
+          "class_name": "pyspark.errors.exceptions.captured.AnalysisException",
+          "message": "Traceback (most recent call last):\n  File \"/Workspace/dev/ecommerce/files/src/bronze/bronze_orchestration.py\", cell 1, line 54, in bronze_customer_cdc\npyspark.errors.exceptions.captured.AnalysisException: [NO_SUCH_CATALOG_EXCEPTION] Catalog 'ecommerce_${var.catalog_env}' was not found. Please verify the catalog name and then retry the query or command again. SQLSTATE: 42704"
+        }
+      ],
+      "fatal": true
+    },
+    "event_type": "flow_progress",
+    "id": "bade1b60-2faa-11f1-b3c4-566dcefa2bd6",
+    "level": "ERROR",
+    "maturity_level": "STABLE",
+    "message": "Failed to resolve flow: 'ecommerce_.bronze.bronze_customer_cdc'.",
+    "origin": {
+      "cloud": "AWS",
+      "cluster_id": "0403-221522-tsy22q4k-v2n",
+      "flow_name": "ecommerce_.bronze.bronze_customer_cdc",
+      "org_id": 1782094926787982,
+      "pipeline_id": "6184e312-5926-41ef-b0da-92b995d3edb1",
+      "pipeline_name": "dev_anoopdk_sdp-ecommerce_e2e",
+      "region": "us-east-2",
+      "request_id": "49afe770-e973-460a-a75b-251c75285e56",
+      "update_id": "49afe770-e973-460a-a75b-251c75285e56"
+    },
+    "sequence": {
+      "control_plane_seq_no": 1775254577687001,
+      "data_plane_id": {
+        "instance": "execution",
+        "seq_no": 1775254536977016
+      }
+    },
+    "timestamp": "2026-04-03T22:16:15.126Z"
+  },
+  {
+    "error": {
+      "exceptions": [
+        {
+          "class_name": "pyspark.errors.exceptions.captured.AnalysisException",
+          "message": "Traceback (most recent call last):\n  File \"/Workspace/dev/ecommerce/files/src/bronze/bronze_orchestration.py\", cell 1, line 38, in bronze_customer\npyspark.errors.exceptions.captured.AnalysisException: [NO_SUCH_CATALOG_EXCEPTION] Catalog 'ecommerce_${var.catalog_env}' was not found. Please verify the catalog name and then retry the query or command again. SQLSTATE: 42704"
+        }
+      ],
+      "fatal": true
+    },
+    "event_type": "flow_progress",
+    "id": "baddcd40-2faa-11f1-b3c4-566dcefa2bd6",
+    "level": "ERROR",
+    "maturity_level": "STABLE",
+    "message": "Failed to resolve flow: 'ecommerce_.bronze.bronze_customer'.",
+    "origin": {
+      "cloud": "AWS",
+      "cluster_id": "0403-221522-tsy22q4k-v2n",
+      "flow_name": "ecommerce_.bronze.bronze_customer",
+      "org_id": 1782094926787982,
+      "pipeline_id": "6184e312-5926-41ef-b0da-92b995d3edb1",
+      "pipeline_name": "dev_anoopdk_sdp-ecommerce_e2e",
+      "region": "us-east-2",
+      "request_id": "49afe770-e973-460a-a75b-251c75285e56",
+      "update_id": "49afe770-e973-460a-a75b-251c75285e56"
+    },
+    "sequence": {
+      "control_plane_seq_no": 1775254577686001,
+      "data_plane_id": {
+        "instance": "execution",
+        "seq_no": 1775254536977015
+      }
+    },
+    "timestamp": "2026-04-03T22:16:15.124Z"
+  },
+  {
+    "error": {
+      "exceptions": [
+        {
+          "class_name": "pyspark.errors.exceptions.captured.AnalysisException",
+          "message": "Traceback (most recent call last):\n  File \"/Workspace/dev/ecommerce/files/src/bronze/bronze_orchestration.py\", cell 1, line 22, in bronze_order\npyspark.errors.exceptions.captured.AnalysisException: [NO_SUCH_CATALOG_EXCEPTION] Catalog 'ecommerce_${var.catalog_env}' was not found. Please verify the catalog name and then retry the query or command again. SQLSTATE: 42704"
+        }
+      ],
+      "fatal": true
+    },
+    "event_type": "flow_progress",
+    "id": "badc1f90-2faa-11f1-b3c4-566dcefa2bd6",
+    "level": "ERROR",
+    "maturity_level": "STABLE",
+    "message": "Failed to resolve flow: 'ecommerce_.bronze.bronze_order'.",
+    "origin": {
+      "cloud": "AWS",
+      "cluster_id": "0403-221522-tsy22q4k-v2n",
+      "flow_name": "ecommerce_.bronze.bronze_order",
+      "org_id": 1782094926787982,
+      "pipeline_id": "6184e312-5926-41ef-b0da-92b995d3edb1",
+      "pipeline_name": "dev_anoopdk_sdp-ecommerce_e2e",
+      "region": "us-east-2",
+      "request_id": "49afe770-e973-460a-a75b-251c75285e56",
+      "update_id": "49afe770-e973-460a-a75b-251c75285e56"
+    },
+    "sequence": {
+      "control_plane_seq_no": 1775254577685001,
+      "data_plane_id": {
+        "instance": "execution",
+        "seq_no": 1775254536977014
+      }
+    },
+    "timestamp": "2026-04-03T22:16:15.113Z"
+  },
+  {
+    "error": {
+      "exceptions": [
+        {
+          "class_name": "ParseException",
+          "message": "Traceback (most recent call last):\nFile \"/Workspace/dev/ecommerce/files/src/gold/gold_aggregation.py\", cell 1, line 8\n      2 prepare_to_execute_user_notebook_in_isolated_pipeline_module(\n      3   \"L1dvcmtzcGFjZS9kZXYvZWNvbW1lcmNlL2ZpbGVzL3NyYy9nb2xkL2dvbGRfYWdncmVnYXRpb24ucHk=\", \"gold_aggregation_py_bcfad623\", globals(), \"DIRECT_PUBLISHING\", spark,\n      4   enable_parallel_analysis=False\n      5 )\n      7 compiled_code = compile(decode_b64('ZnJvbSBweXNwYXJrIGltcG9ydCBwaXBlbGluZXMgYXMgc2RwDQpmcm9tIHB5c3Bhcmsuc3FsLmZ1bmN0aW9ucyBpbXBvcnQgKg0KZnJvbSBweXNwYXJrLnNxbC50eXBlcyBpbXBvcnQgKg0KZnJvbSBweXNwYXJrLnNxbC53aW5kb3cgaW1wb3J0IFdpbmRvdw0KDQpDQVRBTE9HICAgICA9ICJlY29tbWVyY2VfJHt2YXIuY2F0YWxvZ19lbnZ9Ig0KU0NIRU1BICAgICAgPSAic2lsdmVyIg0KVk9MVU1FX1BBVEggPSBmIi9Wb2x1bWVzL3tDQVRBTE9HfS97U0NIRU1BfS9yYXdfZmlsZXMiDQoNCkBzZHAubWF0ZXJpYWxpemVkX3ZpZXcoDQogICAgbmFtZT0iZWNvbW1lcmNlLiR7dmFyLmNhdGFsb2dfZW52fS5nb2xkLmdvbGRfZGFpbHlfcmV2ZW51ZSIsDQogICAgY29tbWVudD0iRGFpbHkgcmV2ZW51ZSBieSBjaXR5IGFuZCBwYXltZW50IG1ldGhvZC4gUG93ZXJzIHRoZSByZXZlbnVlIGRhc2hib2FyZC4iLA0KICAgIHRhYmxlX3Byb3BlcnRpZXM9eyJxdWFsaXR5IjogImdvbGQifQ0KKQ0KQHNkcC5leHBlY3QoImhhc19yZXZlbnVlIiwgImRhaWx5X3JldmVudWUgPiAwIikNCmRlZiBnb2xkX2RhaWx5X3JldmVudWUoKToNCiAgICByZXR1cm4gKA0KICAgICAgICBzcGFyay5yZWFkLnRhYmxlKGYie0NBVEFMT0d9LntTQ0hFTUF9LnNpbHZlcl9vcmRlcnMiKQ0KICAgICAgICAuZmlsdGVyKGNvbCgib3JkZXJfc3RhdHVzIikuaXNpbigiY29tcGxldGVkIiwgInNoaXBwZWQiKSkNCiAgICAgICAgLmdyb3VwQnkoIm9yZGVyX2RhdGUiLCAic2hpcHBpbmdfY2l0eSIsICJwYXltZW50X21ldGhvZCIpDQogICAgICAgIC5hZ2coDQogICAgICAgICAgICBzdW0oInRvdGFsX2Ftb3VudCIpLmFsaWFzKCJkYWlseV9yZXZlbnVlIiksDQogICAgICAgICAgICBjb3VudCgib3JkZXJfaWQiKS5hbGlhcygib3JkZXJfY291bnQiKSwNCiAgICAgICAgICAgIGF2ZygidG90YWxfYW1vdW50IikuYWxpYXMoImF2Z19vcmRlcl92YWx1ZSIpLA0KICAgICAgICAgICAgc3VtKCJxdWFudGl0eSIpLmFsaWFzKCJ0b3RhbF9pdGVtc19zb2xkIikNCiAgICAgICAgKQ0KICAgICkNCg0KDQojIC0tLSBHT0xEIFRBQkxFIDI6IEN1c3RvbWVyIDM2MCBWaWV3IC0tLQ0KQHNkcC5tYXRlcmlhbGl6ZWRfdmlldygNCiAgICBuYW1lPSJlY29tbWVyY2UuJHt2YXIuY2F0YWxvZ19lbnZ9LmdvbGQuZ29sZF9jdXN0b21lcl8zNjAiLA0KICAgIGNvbW1lbnQ9IlVuaWZpZWQgY3VzdG9tZXIgcHJvZmlsZSB3aXRoIG9yZGVyIGhpc3RvcnkgbWV0cmljcy4iLA0KICAgIHRhYmxlX3Byb3BlcnRpZXM9eyJxdWFsaXR5IjogImdvbGQifQ0KKQ0KZGVmIGdvbGRfY3VzdG9tZXJfMzYwKCk6DQogICAgb3JkZXJfbWV0cmljcyA9ICgNCiAgICAgICAgc3BhcmsucmVhZC50YWJsZShmIntDQVRBTE9HfS57U0NIRU1BfS5zaWx2ZXJfb3JkZXJzIikNCiAgICAgICAgLmZpbHRlcihjb2woIm9yZGVyX3N0YXR1cyIpID09ICJjb21wbGV0ZWQiKQ0KICAgICAgICAuZ3JvdXBCeSgiY3VzdG9tZXJfaWQiKQ0KICAgICAgICAuYWdnKA0KICAgICAgICAgICAgY291bnQoIm9yZGVyX2lkIikuYWxpYXMoInRvdGFsX29yZGVycyIpLA0KICAgICAgICAgICAgc3VtKCJ0b3RhbF9hbW91bnQiKS5hbGlhcygibGlmZXRpbWVfdmFsdWUiKSwNCiAgICAgICAgICAgIGF2ZygidG90YWxfYW1vdW50IikuYWxpYXMoImF2Z19vcmRlcl92YWx1ZSIpLA0KICAgICAgICAgICAgbWluKCJvcmRlcl9kYXRlIikuYWxpYXMoImZpcnN0X29yZGVyX2RhdGUiKSwNCiAgICAgICAgICAgIG1heCgib3JkZXJfZGF0ZSIpLmFsaWFzKCJsYXN0X29yZGVyX2RhdGUiKQ0KICAgICAgICApDQogICAgKQ0KICAgIHJldHVybiAoDQogICAgICAgIHNwYXJrLnJlYWQudGFibGUoZiJ7Q0FUQUxPR30ue1NDSEVNQX0uc2lsdmVyX2N1c3RvbWVycyIpDQogICAgICAgIC5qb2luKG9yZGVyX21ldHJpY3MsICJjdXN0b21lcl9pZCIsICJsZWZ0IikNCiAgICAgICAgLndpdGhDb2x1bW4oInRvdGFsX29yZGVycyIsIGNvYWxlc2NlKGNvbCgidG90YWxfb3JkZXJzIiksIGxpdCgwKSkpDQogICAgICAgIC53aXRoQ29sdW1uKCJsaWZldGltZV92YWx1ZSIsIGNvYWxlc2NlKGNvbCgibGlmZXRpbWVfdmFsdWUiKSwgbGl0KDAuMCkpKQ0KICAgICAgICAud2l0aENvbHVtbigiZGF5c19zaW5jZV9sYXN0X29yZGVyIiwNCiAgICAgICAgICAgIGRhdGVkaWZmKGN1cnJlbnRfZGF0ZSgpLCBjb2woImxhc3Rfb3JkZXJfZGF0ZSIpKSkNCiAgICAgICAgLndpdGhDb2x1bW4oImN1c3RvbWVyX3NlZ21lbnQiLA0KICAgICAgICAgICAgd2hlbihjb2woImxpZmV0aW1lX3ZhbHVlIikgPiA1MDAwLCAiaGlnaF92YWx1ZSIpDQogICAgICAgICAgICAud2hlbihjb2woImxpZmV0aW1lX3ZhbHVlIikgPiAxMDAwLCAibWVkaXVtX3ZhbHVlIikNCiAgICAgICAgICAgIC53aGVuKGNvbCgibGlmZXRpbWVfdmFsdWUiKSA+IDAsICJsb3dfdmFsdWUiKQ0KICAgICAgICAgICAgLm90aGVyd2lzZSgibm9fcHVyY2hhc2VzIikpDQogICAgKQ0KDQoNCiMgLS0tIEdPTEQgVEFCTEUgMzogVG9wIFByb2R1Y3RzIC0tLQ0KQHNkcC5tYXRlcmlhbGl6ZWRfdmlldygNCiAgICBuYW1lPSJlY29tbWVyY2UuJHt2YXIuY2F0YWxvZ19lbnZ9LmdvbGQuZ29sZF90b3BfcHJvZHVjdHMiLA0KICAgIGNvbW1lbnQ9IlByb2R1Y3QgcGVyZm9ybWFuY2UgcmFua2luZyBieSByZXZlbnVlIGFuZCBvcmRlciB2b2x1bWUuIiwNCiAgICB0YWJsZV9wcm9wZXJ0aWVzPXsicXVhbGl0eSI6ICJnb2xkIn0NCikNCmRlZiBnb2xkX3RvcF9wcm9kdWN0cygpOg0KICAgIHJldHVybiAoDQogICAgICAgIHNwYXJrLnJlYWQudGFibGUoZiJ7Q0FUQUxPR30ue1NDSEVNQX0uc2lsdmVyX29yZGVycyIpDQogICAgICAgIC5maWx0ZXIoY29sKCJvcmRlcl9zdGF0dXMiKS5pc2luKCJjb21wbGV0ZWQiLCAic2hpcHBlZCIpKQ0KICAgICAgICAuZ3JvdXBCeSgicHJvZHVjdF9pZCIpDQogICAgICAgIC5hZ2coDQogICAgICAgICAgICBjb3VudCgib3JkZXJfaWQiKS5hbGlhcygidG90YWxfb3JkZXJzIiksDQogICAgICAgICAgICBzdW0oInRvdGFsX2Ftb3VudCIpLmFsaWFzKCJ0b3RhbF9yZXZlbnVlIiksDQogICAgICAgICAgICBzdW0oInF1YW50aXR5IikuYWxpYXMoInRvdGFsX3F1YW50aXR5IiksDQogICAgICAgICAgICBhdmcoInVuaXRfcHJpY2UiKS5hbGlhcygiYXZnX3NlbGxpbmdfcHJpY2UiKSwNCiAgICAgICAgICAgIGNvdW50RGlzdGluY3QoImN1c3RvbWVyX2lkIikuYWxpYXMoInVuaXF1ZV9idXllcnMiKQ0KICAgICAgICApDQogICAgICAgIC53aXRoQ29sdW1uKCJyZXZlbnVlX3JhbmsiLA0KICAgICAgICAgICAgZGVuc2VfcmFuaygpLm92ZXIoV2luZG93Lm9yZGVyQnkoZGVzYygidG90YWxfcmV2ZW51ZSIpKSkpDQogICAgKQ0K'), '\u003ccommand-4294967297\u003e', mode='exec')\n----\u003e 8 exec(compiled_code, sys.modules['gold_aggregation_py_bcfad623'].__dict__)\n     10 from dlt.repl_management import post_user_notebook_in_isolated_pipeline_module\n     11 post_user_notebook_in_isolated_pipeline_module(\"L1dvcmtzcGFjZS9kZXYvZWNvbW1lcmNlL2ZpbGVzL3NyYy9nb2xkL2dvbGRfYWdncmVnYXRpb24ucHk=\", spark)\n\nFile \"/Workspace/dev/ecommerce/files/src/gold/gold_aggregation.py\", cell 1, line 10\n\n\nParseException: [PARSE_SYNTAX_ERROR] Syntax error at or near '.'. SQLSTATE: 42601 (line 1, pos 10)\n\n== SQL ==\necommerce..gold.gold_daily_revenue\n----------^^^"
+        }
+      ],
+      "fatal": true
+    },
+    "event_type": "update_progress",
+    "id": "71505fa0-2fa8-11f1-8979-86b004ad9bd0",
+    "level": "ERROR",
+    "maturity_level": "STABLE",
+    "message": "Update 6ac4ab is FAILED.",
+    "origin": {
+      "cloud": "AWS",
+      "cluster_id": "0403-215859-kg2vm87u-v2n",
+      "org_id": 1782094926787982,
+      "pipeline_id": "6184e312-5926-41ef-b0da-92b995d3edb1",
+      "pipeline_name": "dev_anoopdk_sdp-ecommerce_e2e",
+      "region": "us-east-2",
+      "request_id": "6ac4ab0c-abe0-4540-971e-fa58c82342bf",
+      "update_id": "6ac4ab0c-abe0-4540-971e-fa58c82342bf"
+    },
+    "sequence": {
+      "control_plane_seq_no": 1775253594582001,
+      "data_plane_id": {
+        "instance": "execution",
+        "seq_no": 1775253570069014
+      }
+    },
+    "timestamp": "2026-04-03T21:59:52.730Z"
+  },
+  {
+    "error": {
+      "exceptions": [
+        {
+          "message": "PERMISSION_DENIED: User 'anoopdk@gmail.com' does not have permission to create schema in catalog `ecommerce`"
+        }
+      ],
+      "fatal": true
+    },
+    "event_type": "update_progress",
+    "id": "1a773560-2fa7-11f1-b80a-fe53c0a57a8f",
+    "level": "ERROR",
+    "maturity_level": "STABLE",
+    "message": "Update 875f32 is FAILED.",
+    "origin": {
+      "cloud": "AWS",
+      "org_id": 1782094926787982,
+      "pipeline_id": "6184e312-5926-41ef-b0da-92b995d3edb1",
+      "pipeline_name": "dev_anoopdk_sdp-ecommerce_e2e",
+      "region": "us-east-2",
+      "request_id": "875f32cd-10ed-4b31-ad27-ddc38f8a62d0",
+      "update_id": "875f32cd-10ed-4b31-ad27-ddc38f8a62d0"
+    },
+    "sequence": {
+      "control_plane_seq_no": 1775253017528001
+    },
+    "timestamp": "2026-04-03T21:50:17.526Z"
+  }
+]
