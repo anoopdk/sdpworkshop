@@ -1,3 +1,10 @@
+# ---------------------------------------------------------------------------
+# Silver Layer Transformations
+# AUTO CDC does NOT depend on Bronze CDF
+# Materialized Views also do NOT require Bronze CDF
+# ---------------------------------------------------------------------------
+
+
 import os
 import sys
 
@@ -85,7 +92,7 @@ def silver_orders_stage():
             "_inserted_at",
             "_file_mod_time",
             "_source_file",
-            "_order_index",
+            # "_order_index",
         )
     )
 
@@ -134,7 +141,7 @@ def silver_customers_stage():
             "_inserted_at",
             "_file_mod_time",
             "_source_file",
-            "_cust_index",
+            # "_cust_index",
         )
     )
 
@@ -186,7 +193,7 @@ def silver_products_stage():
             "_inserted_at",
             "_file_mod_time",
             "_source_file",
-            "_prod_index",
+            # "_prod_index",
         )
     )
 
@@ -243,24 +250,41 @@ sdp.create_auto_cdc_flow(
 
 # ===========================================================================
 # LAYER 3: DERIVED FACT TABLES (Built on Silver Tables)
+# RECOMMENDED REFACTOR: Materialized View instead of append_flow
 # ===========================================================================
 
-sdp.create_streaming_table(
+# This replaces:
+# create_streaming_table(...) + @append_flow(...)
+#
+# Why MV is better here:
+# - Joins multiple Silver state tables
+# - Recomputes when upstream Silver changes
+# - Prevents stale customer/order enrichment
+# - Simpler maintenance than streaming append facts
+
+# sdp.create_streaming_table(
+#     name=f"{CATALOG}.silver.silver_order_customer_fact",
+#     comment="Append-only derived fact combining current order + customer records.",
+#     table_properties={**table_props
+#                       , "pipelines.skipChangeCommits": "true" # Optimization: skip change commits for this fact table since it's append-only and doesn't need to track updates/deletes.
+#                       },
+#     cluster_by=["customer_id", "order_date"],
+# )
+
+
+# @sdp.append_flow(
+#     target=f"{CATALOG}.silver.silver_order_customer_fact",
+#     name="silver_order_customer_fact_append_flow",
+#     comment="Facts are append_flow by design: immutable analytical events with no in-place updates.",
+
+@sdp.materialized_view(
     name=f"{CATALOG}.silver.silver_order_customer_fact",
-    comment="Append-only derived fact combining current order + customer records.",
+    comment="Derived analytical fact combining current orders and current customers. Auto-refreshes when upstream Silver tables change.",
     table_properties=table_props,
-    cluster_by=["customer_id", "order_date"],
 )
-
-
-@sdp.append_flow(
-    target=f"{CATALOG}.silver.silver_order_customer_fact",
-    name="silver_order_customer_fact_append_flow",
-    comment="Facts are append_flow by design: immutable analytical events with no in-place updates.",
-)
-def silver_order_customer_fact_append_flow():
+def silver_order_customer_fact():
     # Read current dimension snapshots inline to avoid extra helper MVs and reduce compute overhead.
-    orders = spark.readStream.table(f"{CATALOG}.silver.silver_orders").where(col("__END_AT").isNull())
+    orders = spark.read.table(f"{CATALOG}.silver.silver_orders").where(col("__END_AT").isNull())
     customers = spark.read.table(f"{CATALOG}.silver.silver_customers").where(col("__END_AT").isNull())
 
     return (
@@ -274,7 +298,7 @@ def silver_order_customer_fact_append_flow():
         )
         .withColumn("customer_tenure_days", datediff(col("o.order_date"), col("c.signup_date")))
         .withColumn("is_high_value_order", col("o.total_amount") >= lit(1000))
-        .withColumn("_fact_load_id", current_timestamp())
+        .withColumn("_mv_refreshed_at", current_timestamp())
         .select(
             col("o.order_sk"),
             col("o.order_id"),
@@ -299,27 +323,35 @@ def silver_order_customer_fact_append_flow():
             col("order_amount_band"),
             col("customer_tenure_days"),
             col("is_high_value_order"),
-            col("_fact_load_id"),
+            col("_mv_refreshed_at"),
         )
     )
 
 
-sdp.create_streaming_table(
+# sdp.create_streaming_table(
+#     name=f"{CATALOG}.silver.silver_order_customer_product_fact",
+#     comment="Append-only derived fact combining current order + customer + product records.",
+#     table_properties={**table_props
+#                       , "pipelines.skipChangeCommits": "true" # Optimization: skip change commits for this fact table since it's append-only and doesn't need to track updates/deletes.
+#                       },
+#     cluster_by=["product_id", "order_date"],
+# )
+
+
+# @sdp.append_flow(
+#     target=f"{CATALOG}.silver.silver_order_customer_product_fact",
+#     name="silver_order_customer_product_fact_append_flow",
+#     comment="Facts are append_flow by design: keep an immutable timeline and simplify downstream gold aggregation.",
+# )
+
+@sdp.materialized_view(
     name=f"{CATALOG}.silver.silver_order_customer_product_fact",
-    comment="Append-only derived fact combining current order + customer + product records.",
+    comment="Derived analytical fact combining current orders, customers, and products. Auto-refreshes when upstream Silver tables change.",
     table_properties=table_props,
-    cluster_by=["product_id", "order_date"],
 )
-
-
-@sdp.append_flow(
-    target=f"{CATALOG}.silver.silver_order_customer_product_fact",
-    name="silver_order_customer_product_fact_append_flow",
-    comment="Facts are append_flow by design: keep an immutable timeline and simplify downstream gold aggregation.",
-)
-def silver_order_customer_product_fact_append_flow():
+def silver_order_customer_product_fact():
     # Inline current snapshots keep the graph simpler than maintaining dedicated current-state MVs.
-    orders = spark.readStream.table(f"{CATALOG}.silver.silver_orders").where(col("__END_AT").isNull())
+    orders = spark.read.table(f"{CATALOG}.silver.silver_orders").where(col("__END_AT").isNull())
     customers = spark.read.table(f"{CATALOG}.silver.silver_customers").where(col("__END_AT").isNull())
     products = spark.read.table(f"{CATALOG}.silver.silver_products").where(col("__END_AT").isNull())
 
@@ -335,7 +367,7 @@ def silver_order_customer_product_fact_append_flow():
             .otherwise(lit("IN_STOCK")),
         )
         .withColumn("is_price_mismatch", abs(col("o.unit_price") - col("p.unit_price")) > lit(0.01))
-        .withColumn("_fact_load_id", current_timestamp())
+        .withColumn("_mv_refreshed_at", current_timestamp())
         .select(
             col("o.order_sk"),
             col("c.customer_sk"),
@@ -358,6 +390,6 @@ def silver_order_customer_product_fact_append_flow():
             col("p.stock_quantity"),
             col("product_stock_status"),
             col("is_price_mismatch"),
-            col("_fact_load_id"),
+            col("_mv_refreshed_at"),
         )
     )

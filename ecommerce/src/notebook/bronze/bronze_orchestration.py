@@ -9,10 +9,12 @@ CATALOG     = f"ecommerce_{catalog_env}"
 SCHEMA      = "bronze"
 VOLUME_PATH = f"/Volumes/{CATALOG}/{SCHEMA}/source_files"
 
-table_props = {
-                "delta.enableRowTracking": "true",
-                "delta.enableChangeDataFeed": "true",
-            }
+# table_props = {
+#                 "delta.enableRowTracking": "true",
+#                 "delta.enableChangeDataFeed": "true",
+#             }
+
+#No — your Bronze tables do NOT need delta.enableChangeDataFeed or delta.enableRowTracking even if Silver uses AUTO CDC or Materialized Views.
 
 # @sdp.table(
 #     name=f"{CATALOG}.{SCHEMA}.bronze_order",
@@ -37,14 +39,14 @@ table_props = {
 # 1. Define the container
 sdp.create_streaming_table(
     name=f"{CATALOG}.{SCHEMA}.bronze_order",
-    table_properties=table_props
+    comment="Master bronze orders source table."
 )
 
 # 2. THE BACKFILL (Optional - if you have legacy data)
 # @sdp.append_flow(target=f"{CATALOG}.{SCHEMA}.bronze_order", once=True)
 # def backfill_orders():
 #     # This runs once, loads your historical data, and then finishes.
-#     return spark.read.format("parquet").load(f"{VOLUME_PATH}/historical_orders/")
+#     return spark.read.format("parquet").load(f"{VOLUME_PATH}/orders/")
 
 # 3. THE CONTINUOUS INGEST (Your cloudFiles code)
 @sdp.append_flow(target=f"{CATALOG}.{SCHEMA}.bronze_order")
@@ -59,16 +61,22 @@ def stream_orders():
         .select(
             "*",
             current_timestamp().alias("_ingest_ts"),
+            col("_metadata.file_modification_time").alias("_file_mod_time"),
             col("_metadata.file_path").alias("_source_file"),
         )
     )
-
-@sdp.table(
+sdp.create_streaming_table(
     name=f"{CATALOG}.{SCHEMA}.bronze_customer",
-    comment = "Customer table",
-    table_properties = table_props
+    comment="Master bronze customers source table.",
 )
-def bronze_customer():
+
+# @sdp.table(
+#     name=f"{CATALOG}.{SCHEMA}.bronze_customer",
+#     comment = "Customer table",
+#     table_properties = table_props
+# )
+@sdp.append_flow(target=f"{CATALOG}.{SCHEMA}.bronze_customer")
+def stream_customer():
     return(
         spark.readStream.format("cloudFiles")
         .option("cloudFiles.format", "csv")
@@ -82,13 +90,18 @@ def bronze_customer():
         .withColumn("_source_file", col("_metadata.file_path"))
     )
 
-@sdp.table(
+# @sdp.table(
+#     name=f"{CATALOG}.{SCHEMA}.bronze_product",
+#     comment="Change Data Capture feed for the Product catalogue dimension. "
+#             "Contains INSERT / UPDATE / DELETE operations with cdc_timestamp and operation columns.",
+#     table_properties=table_props
+# )
+sdp.create_streaming_table(
     name=f"{CATALOG}.{SCHEMA}.bronze_product",
-    comment="Change Data Capture feed for the Product catalogue dimension. "
-            "Contains INSERT / UPDATE / DELETE operations with cdc_timestamp and operation columns.",
-    table_properties=table_props
+    comment="Master bronze products source table.",
 )
-def bronze_product():
+@sdp.append_flow(target=f"{CATALOG}.{SCHEMA}.bronze_product")
+def stream_product():
     return(
         spark.readStream.format("cloudFiles")
         .option("cloudFiles.format", "csv")
