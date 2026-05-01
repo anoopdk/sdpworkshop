@@ -12,9 +12,100 @@ resources:
           pipeline_task:
             pipeline_id: ${resources.pipelines.pipeline_sdp_ecommerce_e2e.id}
             full_refresh: false
+          # SAFETY 1: Hard Timeout
+          # If the job hits 30 mins (2x the SLA), kill it immediately.
+          timeout_seconds: 1800
+          # SAFETY 2: Retries
+          # Don't let a failing job restart 10 times and drain DBUs.
+          max_retries: 1
+      # SAFETY 3: Email Alerts
+      email_notifications:
+        on_failure: [ "anoop.kulkarni@example.com" ]
+        on_duration_warning_threshold_exceeded: [ "anoop.kulkarni@example.com" ]
+      # SAFETY 4: Threshold-Based Health Rules
+      # Define the threshold for "More than usual"
+      # If it usually takes 15m, alert at 20m.
+      health:
+        rules:
+          - metric: RUN_DURATION_SECONDS
+            op: GREATER_THAN
+            value: 1200 # 20 minutes
+      # SAFETY 5: Run As
+      # In production, this job should run with a service principal that has just enough permissions.
+      # run_as:
+      #   service_principal_name: ${var.prod_service_principal_name}
       tags:
         domain: ecommerce
         region: london
       queue:
         enabled: true
       performance_target: PERFORMANCE_OPTIMIZED
+
+# resources:
+#   jobs:
+#     transformation_job:
+#       name: "Modernization ETL"
+#       tasks:
+#         - task_key: "process_silver_layer"
+#           job_cluster_key: "optimized_etl_cluster"
+#           notebook_task:
+#             notebook_path: ../src/transform.py
+
+#       job_clusters:
+#         - job_cluster_key: "optimized_etl_cluster"
+#           new_cluster:
+#             spark_version: "15.4.x-scala2.12"
+#             node_type_id: "Standard_DS3_v2"
+#             spark_conf:              
+#               # 1. Handle Data Skew (Your specific issue)
+#               spark.sql.adaptive.skewJoin.enabled: "true"
+              
+#               # 2. Dynamic Partition Management (The 2026 "Auto" Standard)
+#               # This replaces manually setting a fixed number of partitions.
+#               spark.sql.shuffle.partitions: "auto"
+              
+#               # 3. Memory Guardrail (Your Variable)
+#               # Ensures that even with 'auto' partitions, they stay within a healthy size.
+#               spark.sql.adaptive.advisoryPartitionSizeInBytes: ${var.advisory_partition_size}
+              
+#               # 4. Kryo Serialization (The Secret Sauce for Large Data)
+#               # Kryo ensures that when that 2.3TB of data moves across the network, it’s compressed and serialized as fast as humanly possible.
+#               spark.serializer: "org.apache.spark.serializer.KryoSerializer"
+
+#               # 5. skewedPartitionFactor (Optional, for Extreme Skew)
+#               # If you have extreme skew, this setting allows Spark to be more aggressive in splitting skewed partitions.
+#               # This tells Spark to treat a partition as "skewed" if it's only 2x larger than the median, rather than waiting until it's 5x larger.
+#               spark.sql.adaptive.skewedPartitionFactor: 2 # Default is 5
+
+# How this handles Skew and Spill
+# By using these settings at the job cluster level, Spark performs a two-step optimization:
+
+# Skew Handling: Before the join begins, Spark analyzes the partition sizes. If one key is massive (skewed), it splits that partition across multiple tasks to prevent one "straggler" worker from holding up the entire 15-minute window.
+
+# Spill Mitigation: By setting a realistic advisoryPartitionSizeInBytes (like 128MB or 256MB), you ensure that partitions are small enough to fit into the executor's memory fraction. If they are too large, they spill to the local disk of the worker, which is significantly slower than RAM.
+
+
+# Leveraging DABs for Cost Tracking (Custom Tags)
+# Since you are a Senior Data Engineer, you’ll want to prove the ROI of your tuning. You can add Custom Tags to your job cluster in the same resources/jobs.yml file. This allows you to see exactly how much your "Azure/Databricks Modernization" is saving in the Azure Cost Management portal.
+
+# Updated resources/jobs.yml with Tags:
+
+# YAML
+# resources:
+#   jobs:
+#     transformation_job:
+#       name: "Modernization ETL"
+#       job_clusters:
+#         - job_cluster_key: "optimized_etl_cluster"
+#           new_cluster:
+#             spark_version: "15.4.x-scala2.12"
+#             node_type_id: "Standard_DS3_v2"
+#             # TAGS for Billing & ROI Tracking
+#             custom_tags:
+#               Project: "Modernization_2026"
+#               Owner: "Anoop_Kulkarni"
+#               CostCenter: "Data_Engineering_Prod"
+#             spark_conf:
+#               spark.sql.adaptive.enabled: "true"
+#               spark.sql.adaptive.advisoryPartitionSizeInBytes: ${var.advisory_partition_size}
+#               spark.sql.shuffle.partitions: "auto" # The 2026 "Magic" setting
