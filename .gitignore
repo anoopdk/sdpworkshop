@@ -1,0 +1,35 @@
+# Python / notebooks
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.env.*
+!.env.example
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# IDE / OS
+.idea/
+.vscode/
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# Secrets / local runtime
+*.pem
+*.key
+secrets/
+local/
+.databricks/
+.cache/
+
+# Build / packaging
+dist/
+build/
+*.log
